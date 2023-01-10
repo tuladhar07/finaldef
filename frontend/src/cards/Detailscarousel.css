@@ -1,0 +1,10 @@
+.details_card_cat
+
+{
+    display:grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;     
+    margin-left: 50px;
+    margin-right: 50px;
+    
+                     
+}
