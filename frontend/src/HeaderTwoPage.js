@@ -29,6 +29,14 @@ function HeaderTwoPage() {
     
     <Footer/>
     </div>
+      
+      function HeaderTwoPage() {
+  return (
+    <div>
+    <HeaderTwo/>
+    
+    <Footer/>
+    </div>
   )
 }
 
