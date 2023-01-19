@@ -37,65 +37,58 @@ app.post("/register", async (req, resp)=>{
     let {username, email,  ContactNo, password, confirmPassword }= req.body;
    
 
-    if (username==""||email==""||ContactNo==""||password==""||confirmPassword==""){
+    if (!username||!email||!ContactNo||!password||!confirmPassword){
          resp.json({
             status:"failed",
             message:"empty input fields",
          });
-         
-    }else {
-        //checking if user already exists
-        User.find({email})
-        .then ((result)=>{
-            if (result.length){
-                // a user already exists
-                resp.json({
-                    status:"FAILED",
-                    message:"User already exists",
-                }) ;
-            }else {
-                //try to create a new user
-                
-                //password handling
-                const saltRounds= 10;
-                bcrypt
-                .hash(password, saltRounds)
-                .then((hashedPassword)=>{
-                    const newUser= new User({
-                        username, 
-                        email,
-                     ContactNo,
-                        password: hashedPassword,
-                        confirmPassword,
-                        verified: false,
-
-                    });
-                    newUser
-                    .save()
-                    .then ((result)=>{
-                        //handle account verificaiton
-                       //sendVerifictionEmail(result, resp);
-                       sendOTPVerificationEmail(result, resp)
-                    })
-                    .catch((err)=>{
-                        console.log(err);
-                        resp.json({
-                            status:"Failed",
-                            message:"ann error occured while saving user acc",
-                        });
-                    });
-                })
-                .catch((err)=>{
-                    resp.json({
-                        status:"FAILED",
-                        message:"an error while hashing pw"
-                    });
-                });
-            }
-        })
+         return;
     }
-    
-    
+
+    let result = await User.find({email})
+    if(result.length){
+        resp.json({
+            status:"FAILED",
+            message:"User already exists",
+        }) ;
+        return;
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    try{
+
+        const hashedPassword = await bcrypt.hash(confirmPassword.trim(), salt);
+        password = hashedPassword;
+        const newUser = await new User({
+            username, 
+            email,
+            ContactNo,
+            password,
+            confirmPassword,
+            verified: false,
+
+        });
+        console.log(bcrypt.compareSync(confirmPassword,hashedPassword))
+        console.log(password, hashedPassword);
+        try{
+            let isSaved = await newUser.save()
+        sendOTPVerificationEmail(isSaved, resp)
+    }
+    catch(err){
+        console.log(err);
+        resp.json({
+        status:"Failed",
+        message:"ann error occured while saving user acc",
+    });
+    return;
+}
+}
+catch(err){
+    resp.json({
+        status:"FAILED",
+        message:"an error while hashing pw"
+    });
+}
 });
 
 
@@ -165,30 +158,28 @@ const sendOTPVerificationEmail= async ({_id, email}, resp)=>{
 app.post("/login",async(req,resp) => {
  console.log(req.body);
 
-    if (req.body.password && req.body.username ){
-        console.log(req.body.password)
-        const saltRounds= 10;
-               req.body.password= bcrypt
-                .hashSync( req.body.password, saltRounds)
-                console.log(req.body.password)
-        let user = await User.findOne(req.body).select("password");
-        console.log(user)
-        if (user){
-            console.log (user);
-           Jwt.sign({user}, jwtKey, {expiresIn: '2h'}, (err, token)=>{
-                if (err){
-                    resp.send ({result :"smth went wrong "})
-                }
-                resp.send( {user,  auth: token})
-            })
-            
-        } else{
-            resp.send({result:"no user found"})
-        }
-    }else {resp.send ({result:"no user found"})}
-
-    
-
+    if (!req.body.password || !req.body.username ){
+        resp.send ({result:"no user found"})
+        return;
+    }
+    const password = req.body.password.trim()
+    const username = req.body.username.trim()
+    let user = await User.find({username}).select("password")
+    console.log(user);
+    let checkValid = await bcrypt.compare(password, user[0].password)
+    console.log(checkValid)
+    if (checkValid){
+        console.log (user);
+        Jwt.sign({user}, jwtKey, {expiresIn: '2h'}, (err, token)=>{
+            if (err){
+                resp.send ({result :"smth went wrong "})
+            }
+            resp.send( {user,  auth: token})
+        })
+        
+    } else{
+        resp.send({result:"no user found"})
+    }
 })
 
 //middle ware 
