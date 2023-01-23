@@ -16,8 +16,6 @@ import About from "./About";
 import Profilepage from "./profile/ProfilePage";
 import HeaderTwoPage from "./HeaderTwoPage";
 import PrivateComponent from "./privatecomponent";
-import Forgetpassword from "./form/forgetpassword";
-import ResetPassword from "./form/ResetPassword";
 import {
   BrowserRouter as Router,
   Route,
@@ -47,8 +45,6 @@ function App() {
       <Route path="/categories" element={<Category/>}></Route>
       <Route path="/about" element={<About/>}></Route>
       <Route path="/profile" element={<Profilepage/>}></Route>
-      <Route path="/forget-password" element={<Forgetpassword/>}></Route>
-      <Route path="/reset-password" element={<ResetPassword/>}></Route>
       
       </Routes>
         

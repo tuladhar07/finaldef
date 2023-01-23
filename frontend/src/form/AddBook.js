@@ -1,128 +1,157 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "./AddBook.css";
 import HeaderTwo from "../HeaderTwo";
 import Footer from "../Footer";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-function AddBook() {
-  const [selectedFile, setSelectedFile] = useState("");
-  const [image, setImage] = useState("");
-  const [bookname, setBookName] = useState("");
-  const [author, setAuthor] = useState("");
-  const [condition, setCondition] = useState("");
-  const [publication, setPublication] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [location, setLocation] = useState("");
 
-  const handleApi = async (e) => {
-    e.preventDefault();
+
+class AddBook extends Component {
+  
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      bookname: "",
+      author: "",
+      condition:"",
+      message: '',
+      category: "bachelors",
+      selectedFile: null,
+      
+    };
+  
+  }
+  
+  handlebooknameChange = (event) => {
+    this.setState({
+      bookname: event.target.value,
+    });
+  };
+  handleauthorChange = (event) => {
+    this.setState({
+      author: event.target.value,
+    });
+  };
+  handleconditionChange = (event) => {
+    this.setState({
+      condition: event.target.value,
+    });
+  };
+  handlelocationChange = (event) => {
+    this.setState({
+      location: event.target.value,
+    });
+  };
+  updateNumber = (e) => {
+    const val=e.target.value;
+    if(e.target.validity.valid) this.setState({message:e.target.value});
+    else if(val === '' || val==='-') this.setState({message: val});
+    
+  };
+  updateprice = (e) => {
+    const val=e.target.value;
+    if(e.target.validity.valid) this.setState({price:e.target.value});
+    else if(val === '' || val==='-') this.setState({price: val});
+    
+  };
+  handlecategoryChange = (event) => {
+    this.setState({
+      category: event.target.value,
+    });
+  };
+
+  // On file select (from the pop up)
+  onFileChange = event => {
+     
+    // Update the state
+    this.setState({ selectedFile: event.target.files[0] });
+   
+  };
+   
+  // On file upload (click the upload button)
+  onFileUpload = () => {
+   
+    // Create an object of formData
     const formData = new FormData();
+   
+    // Update the formData object
+    formData.append(
+      "myFile",
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    );
+   
+    // Details of the uploaded file
+    console.log(this.state.selectedFile);
 
-    formData.append("file", selectedFile);
-    formData.append("bookname", bookname);
-    formData.append("author", author);
-    formData.append("condition", condition);
-    formData.append("publication", publication);
-    formData.append("category", category);
-    formData.append("price", price);
-    formData.append("location", location);
+  
+  }
 
-    const data = {};
-
-    for (const [key, value] of formData.entries()) {
-      data[key] = value;
-    }
-
-    console.log(data);
-
-    await axios
-      .post("https://63c173fb99c0a15d28ea36fc.mockapi.io/getbooks", data)
-      .then((res) => {
-        console.log(res);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleImageChange = (e) => {
-    console.log(e.target.files);
-    setSelectedFile(e.target.files[0]);
-  };
-
-  return (
-    <>
-      <div className="box">
+  render() {
+    return (
+      <>
+      
+        <div className="box">
         <h1 className="add_tit">Add a new book</h1>
-        <form className="addbook_f" onSubmit={handleApi}>
+        <form className="addbook_f">
+        
           <div className="name">
             <label>Book Name</label>
             <input
               type="text"
-              name="bookname"
-              value={bookname}
-              onChange={(e) => setBookName(e.target.value)}
+              value={this.state.bookname}
+              onChange={this.handlebooknameChange}
             />
+            
           </div>
           <div>
             <label>Author</label>
             <input
-              type="text"
-              name="author"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
+            type="text"
+            value={this.state.author}
+            onChange={this.handleauthorChange}
             />
           </div>
           <div>
             <label>Condition</label>
             <input
-              type="text"
-              name="condition"
-              value={condition}
-              onChange={(e) => setCondition(e.target.value)}
+            type="text"
+            value={this.state.condition}
+            onChange={this.handleconditionChange}
             />
           </div>
           <div>
             <label>Publication Year</label>
             <input
-              type="tel"
-              name="publication"
-              value={publication}
-              onChange={(e) => setPublication(e.target.value)}
-              pattern="^-?[0-9]\d*\.?\d*$"
+            type="tel"
+            value={this.state.message}
+            onChange={this.updateNumber}
+            pattern="^-?[0-9]\d*\.?\d*$"
             />
+            
           </div>
           <div>
             <label>Price(Rs)</label>
             <input
-              type="tel"
-              name="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              pattern="^-?[0-9]\d*\.?\d*$"
+            type="tel"
+            value={this.state.price}
+            onChange={this.updateprice}
+            pattern="^-?[0-9]\d*\.?\d*$"
             />
             <div>
-              <label>Location</label>
-              <input
-                type="text"
-                name="location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
+            <label>Location</label>
+            <input
+            type="text"
+            value={this.state.location}
+            onChange={this.handlelocationChange}
+            />
+          </div>
+            
           </div>
           <div className="Category">
-            <label>
-              Select Category{""}
-              {""}
-            </label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
+            <label>Select Category{''}{''}</label>
+            <select value={this.state.category} onChange={this.handlecategoryChange}>
               <option value="+2">+2 Books</option>
               <option value="bachelors">Bachelors</option>
               <option value="entrance">Entrance</option>
@@ -130,16 +159,19 @@ function AddBook() {
             </select>
           </div>
           <div className="image">
-            <input type="file" name="file" onChange={handleImageChange} />
-
-            <button type="submit" className="uploadbtn" onChange={handleApi}>
-              Upload!
-            </button>
+          
+                <input type="file" onChange={this.onFileChange} />
+                <button type="submit" className="uploadbtn" onClick={this.onFileUpload}>
+                  Upload!
+                </button>
+            
           </div>
         </form>
-      </div>
-    </>
-  );
+        </div>
+       
+      </>
+    );
+  }
 }
 
 export default AddBook;
