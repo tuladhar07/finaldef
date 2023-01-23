@@ -45,7 +45,7 @@ app.post("/register", async (req, resp)=>{
          return;
     }
 
-    let result = await User.find({email})
+    let result = await User.find({email}&&{username})
     if(result.length){
         resp.json({
             status:"FAILED",
@@ -78,7 +78,7 @@ app.post("/register", async (req, resp)=>{
         console.log(err);
         resp.json({
         status:"Failed",
-        message:"ann error occured while saving user acc",
+        message:"An error occured while saving user account.",
     });
     return;
 }
@@ -86,7 +86,7 @@ app.post("/register", async (req, resp)=>{
 catch(err){
     resp.json({
         status:"FAILED",
-        message:"an error while hashing pw"
+        message:"An error while hashing password."
     });
 }
 });
@@ -159,7 +159,7 @@ app.post("/login",async(req,resp) => {
  console.log(req.body);
 
     if (!req.body.password || !req.body.username ){
-        resp.send ({result:"no user found"})
+        resp.send ({result:"No user found."})
         return;
     }
     const password = req.body.password.trim()
@@ -172,13 +172,13 @@ app.post("/login",async(req,resp) => {
         console.log (user);
         Jwt.sign({user}, jwtKey, {expiresIn: '2h'}, (err, token)=>{
             if (err){
-                resp.send ({result :"smth went wrong "})
+                resp.send ({result :"Something went wrong. "})
             }
             resp.send( {user,  auth: token})
         })
         
     } else{
-        resp.send({result:"no user found"})
+        resp.send({result:"No user found."})
     }
 })
 
@@ -209,7 +209,7 @@ app.post("/add-product", (req, resp)=>{
             condition: fields.condition[0], 
             publicationyr:fields.publicationyr[0],
             prices:fields.prices[0],
-            _id:fields._id[0],
+           // _id:fields._id[0],
             image : imageURL
            
             
@@ -235,7 +235,7 @@ app.post("/verifyOTP", async(req, res )=>{
     try{
         let {userId, otp}= req.body;
         if (!userId||!otp){
-            throw Error ("Empty otp details  are not allowed");
+            throw Error ("Empty otp details  are not allowed.");
 
         }else {
             const USerOTPVerificationRecords= await UserOTPVerification.find ({
@@ -246,7 +246,7 @@ app.post("/verifyOTP", async(req, res )=>{
                
                 throw new Error(
 
-                    "account record doesnt exist or has been verified. please sign in or login "
+                    "Account record doesnt exist or has been verified. Please sign in or login."
                 );
             }  else {
                 //user otp record exists
@@ -256,7 +256,7 @@ app.post("/verifyOTP", async(req, res )=>{
                 if (expiresAt< Date.now()){
                     // user otp record has expired
                     await UserOTPVerification.deleteMany ({userId});
-                    throw new Error ("Code has expired. Please request again");
+                    throw new Error ("Code has expired. Please request again.");
                         
                 }else { 
                     console.log("req, res");
@@ -266,14 +266,14 @@ app.post("/verifyOTP", async(req, res )=>{
 
                     if (!validOTP){
                         //supplied otp is wrong 
-                        throw new Error("Invalid code passed. Check your inbox .");
+                        throw new Error("Invalid code passed. Check your inbox.");
                     }else {
                         //success
                         await User.updateOne({_id: userId}, {verified: true});
                         await UserOTPVerification.deleteMany ({userId});
                         res.json({
-                            status: "VERIFIED",
-                            message:`USer email verified successfully`,
+                            status: "VERIFIED!",
+                            message:`USer email verified successfully.`,
                         });
                     }
                 }
@@ -282,7 +282,7 @@ app.post("/verifyOTP", async(req, res )=>{
         }
     }catch (error) {
         res.json ({
-            status:"laudu",
+            status:"Failed",
             message:error.message , 
         });
 
@@ -305,8 +305,8 @@ app.post ("/requestPasswordReset", (req, res)=> {
 
                 if (!data[0].verified){
                     res.json ({
-                        status:"FAILED",
-                        message :"Email hasn't been verified yet. Check your inbox ",
+                        status:"FAILED!",
+                        message :"Email hasn't been verified yet. Check your inbox. ",
 
                     });
                 }   else {
@@ -315,16 +315,16 @@ app.post ("/requestPasswordReset", (req, res)=> {
                 }
             }   else {
                 res.json ({
-                    status : "FAILED",
-                    message:"No acount with the supplied email exists!",
+                    status : "FAILED!",
+                    message:"No acount with the supplied email exists.",
                 });
             }
         })
         .catch (error =>{
             console.log (error);
             res.json ({
-                status:"FAILED",
-                message : "An error occured while checking for existing user ", 
+                status:"FAILED!",
+                message : "An error occured while checking for existing user. ", 
             });
         })
 
@@ -345,7 +345,7 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
         const mailOptions ={
             from : "pustakhubb@gmail.com",
             to: email,
-            subject: "Password Reset",
+            subject: "Password Reset!",
             html : `<p>Please Enter the given  OTP (  <b> ${otp}</b> ) to Reset your Password</p>
              <p> this code expires in 1 hr </p>`
 
@@ -373,8 +373,8 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
                     .then (()=>{
                         //reset email sent and password reset record saved 
                         res.json ({
-                            status: "PENDING ",
-                            message :"Password reset email sent"
+                            status: "PENDING! ",
+                            message :"Password reset email sent."
                         })
                     })
             })
@@ -382,7 +382,7 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
                 console.log(error);
                 res.json ({
                     status:"FAILED",
-                    message:"Couldnt save password reset detail",
+                    message:"Couldnt save password reset detail.",
                 })
 
             })
@@ -391,7 +391,7 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
             console.log (error);
             res.json ({
                 status:"FAILED",
-            message :"An error occured while hasing the password reset data!"            })
+            message :"An error occured while hasing the password reset data!."})
         });
 
     })
@@ -400,7 +400,7 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
         console.log (error);
         res.json ({
             status:"FAILED",
-            message :"Clearing existing password reset records failed",
+            message :"Clearing existing password reset records failed.",
         });
     })
 }
