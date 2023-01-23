@@ -25,8 +25,7 @@ const logout=()=>{
             <li><Link1 to = "home" spy={true} smooth={true} offset={-150} duration={500}>Home</Link1></li>
        <li><Link1 to ="category" spy={true} smooth={true} offset={-100} duration={500}>Categories</Link1></li> 
           <li><Link1  to="about" spy={true} smooth={true} offset={-100} duration={500}>About</Link1></li>
-        <li>{ auth ? <Link2 onClick={logout} to="/login"> Logout </Link2> :
-        <Link2 to="/login"> Sign Up </Link2>}</li>
+        
         </ul>
       </div>
       <div className="header_icons">
@@ -36,7 +35,12 @@ const logout=()=>{
        <SearchIcon className='header_searchIcon' onClick={addSearchData}/>
     
        </div>
-    <Link2 to ="/login"> <PersonIcon className='header_personIcon'/> </Link2>
+ 
+       <li>{ auth ? <Link2 onClick={logout} to="/login"> Logout </Link2> :
+       <Link2 to ="/login"> <PersonIcon className='header_personIcon'/> </Link2>
+        }
+       
+        </li>
       </div>
     </div>
   )

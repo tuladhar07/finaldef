@@ -24,8 +24,9 @@ const Imagecarousel = () => {
                 <Mycard  name="Complete Physics" img={school} seller="Kabita" price="Rs.1000" s="Uploaded By : Koshish Shrestha"/>
                 <Mycard  name="Business Mathematics" img={plustwo} seller="Krishna" price="Rs.2000" s="Uploaded By : Koshish Shrestha"/>
                 <Mycard  name="Account Book" img={entrance} seller="Mbappe" price="Rs. 150" s="Uploaded By : Koshish Shrestha"/>
+                
     
-        
+         
         </div>
     )
 }

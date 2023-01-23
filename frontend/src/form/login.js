@@ -1,60 +1,80 @@
-import React ,{ useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React ,{ useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthProvider';
+
+import axios from '../api/axios';
 import HeaderTwo from '../HeaderTwo'
 import Footer from '../Footer'
 import './login.css'
 
 
 const SignInPage = () => {
-    const navigate=useNavigate();
-    const [values, setValues] = useState({
-        username: "",
-        password: ""
-      });
+const navigate=useNavigate();
+const [email,setEmail]=useState('')
+const [password,setPassword]=useState('')
 
 
-      const handleLogin = async (e) => {
-        e.preventDefault();
-        console.log(values);
+   
+
+
+
+       
       
-        let result=await fetch ('http://localhost:5000/login', {
-            method:'post',
-            body:JSON.stringify(values),
-            headers:{
-                'Content-Type':'application/json'
-            }
-        });
-        result=await result.json();
-        console.warn (result)
-        if (result.username ){
-            localStorage.setItem("user", JSON.stringify(result));
-            navigate('/')
-        }else{
-            alert("pleease enter correct details")}
-      }
+    //     let result=await fetch ('http://localhost:5000/login', {
+    //         method:'post',
+    //         body:JSON.stringify(values),
+    //         headers:{
+    //             'Content-Type':'application/json'
+    //         }
+    //     });
+    //     result=await result.json();
+    //     console.warn (result)
 
-      const onChange = (e) => {
-        setValues({ ...values, [e.target.name]: e.target.value });
-      };
+
+      
+       
+
+    const handleEmail =(e)=>
+    {
+        setEmail(e.target.value)
+    }
+    const handlePassword =(e)=>
+    {
+        setPassword(e.target.value)
+    }
+const handleAPI=(e)=>
+{   e.preventDefault();
+    console.log({email,password})
+    axios.post('https://63c173fb99c0a15d28ea36fc.mockapi.io/login',{
+        email:email,
+        password:password
+    })
+    .then (result=>{
+        console.log(result)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
 
     return (
         <>
 
         <div className="text-center m-5-auto">
             <h2 className="signin_tit">Sign in</h2>
-            <form className="login_f" onSubmit={handleLogin}>
+            <form className="login_f" onSubmit={handleAPI}>
                 <p>
                     <label>Username or email address</label><br/>
-                    <input type="text" name="username" required  onChange={onChange}/>
+                    <input type="text" name="username" required  onChange={handleEmail}/>
                 </p>
                 <p>
                     <label >Password</label>
                     <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
                     <br/>
-                    <input type="password" name="password" required onChange={onChange}/>
+                    <input type="password" name="password" required onChange={handlePassword}/>
                 </p>
 
-            <button id="sub_btn" type="submit" className="btn_login">Login</button> 
+            <button id="sub_btn" type="submit" className="btn_login" >Login</button> 
 
             </form>
             <footer>
@@ -66,6 +86,6 @@ const SignInPage = () => {
         </>
     )
 
-}
 
+    }
 export default SignInPage;
