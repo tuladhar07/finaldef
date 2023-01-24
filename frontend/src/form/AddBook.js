@@ -3,7 +3,7 @@ import "./AddBook.css";
 import HeaderTwo from "../HeaderTwo";
 import Footer from "../Footer";
 import axios from "axios";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AddBook() {
   const [selectedFile, setSelectedFile] = useState("");
@@ -20,21 +20,25 @@ function AddBook() {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.append("image", selectedFile);
+    formData.append("file", selectedFile);
     formData.append("bookname", bookname);
     formData.append("author", author);
     formData.append("condition", condition);
-    formData.append("publicationyr", publication);
+    formData.append("publication", publication);
     formData.append("category", category);
-    formData.append("prices", price);
+    formData.append("price", price);
     formData.append("location", location);
-    formData.append("-id", )
-    for (const value of formData.entries()) {
-      console.log(value);
+
+    const data = {};
+
+    for (const [key, value] of formData.entries()) {
+      data[key] = value;
     }
 
+    console.log(data);
+
     await axios
-      .post("http://localhost:5000/add-product", formData)
+      .post("http://localhost:5000/add-product", data)
       .then((res) => {
         console.log(res);
       })
