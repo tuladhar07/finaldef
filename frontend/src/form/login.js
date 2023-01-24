@@ -3,30 +3,38 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import HeaderTwo from '../HeaderTwo'
 import Footer from '../Footer'
+//import bycrpt from 'bcrypt.js'
 import './login.css'
-
-
 const SignInPage = () => {
-const navigate=useNavigate();
-const [email,setEmail]=useState('')
-const [password,setPassword]=useState('')
+    const navigate=useNavigate();
+    const [values, setValues] = useState({
+        username: "",
+        password: "",
+        verify:""
+      });
 
-
-   
-
-
-
-       
+    
+      const handleLogin = async (e) => {
+        e.preventDefault();
+    
+        console.log(values);
       
-    //     let result=await fetch ('http://localhost:5000/login', {
-    //         method:'post',
-    //         body:JSON.stringify(values),
-    //         headers:{
-    //             'Content-Type':'application/json'
-    //         }
-    //     });
-    //     result=await result.json();
-    //     console.warn (result)
+        let result=await fetch ('http://localhost:5000/login', {
+            method:'post',
+            body:JSON.stringify(values),
+            headers:{
+                'Content-Type':'application/json'
+            }
+        });
+        result=await result.json();
+        console.warn (result)
+        if (result.auth  ){
+            localStorage.setItem("user", JSON.stringify(result.user));
+            localStorage.setItem("token", JSON.stringify(result.auth));
+            navigate('/profile')
+        }else{
+            alert("pleease enter correct details")}
+      }
 
 
       

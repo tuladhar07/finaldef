@@ -38,7 +38,7 @@ function AddBook() {
     console.log(data);
 
     await axios
-      .post("https://63c173fb99c0a15d28ea36fc.mockapi.io/getbooks", data)
+      .post("http://localhost:5000/add-product", data)
       .then((res) => {
         console.log(res);
       })
