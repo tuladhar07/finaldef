@@ -186,15 +186,19 @@ app.post("/login",async(req,resp) => {
 app.use (express.static ("uploads"));
 
 app.post("/add-product", (req, resp)=>{
-    
+    // console.log(req);
     let form = new multiparty.Form({uploadDir: IMAGE_UPLOAD_DIR})
-
+    // console.log(req['body']['data']);
+    // req = req['body']['data'];
     form.parse(req, async function (err, fields, files){
-        if(err) return resp.send({error: err.message});
-
-         console.log (`fields = ${JSON.stringify(fields, null, 2)}`)
+        // console.log(fields);
+        if(err) return resp.send({laudu: err.message});
+        
+        
+        console.log (`fields = ${JSON.stringify(fields, null, 2)}`)
         console.log (`files = ${JSON.stringify(files, null, 2)}`)
-       
+        
+        console.log("!");
         const imagePath= files.image [0].path;
         const imageFileName= imagePath.slice (imagePath.lastIndexOf("\\")+1);
         const imageURL= IMAGE_BASE_URL + imageFileName;
@@ -202,14 +206,12 @@ app.post("/add-product", (req, resp)=>{
         console.log(err, fields, files)
        
         const product= new Product({
-
-            
             bookname: fields.bookname[0],
             author: fields.author[0],
             condition: fields.condition[0], 
             publicationyr:fields.publicationyr[0],
             prices:fields.prices[0],
-            _id:fields._id[0],
+            userId:fields.userId[0],
             image : imageURL
            
             
@@ -404,7 +406,6 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
         });
     })
 }
-
 
 
 app.listen(5000);

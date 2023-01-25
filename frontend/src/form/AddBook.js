@@ -107,11 +107,13 @@ function AddBook() {
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
 
+  const userId= JSON.parse(localStorage.getItem('user'))[0]._id;
+
   const handleApi = async (e) => {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.append("file", selectedFile);
+    formData.append("image", selectedFile);
     formData.append("bookname", bookname);
     formData.append("author", author);
     formData.append("condition", condition);
@@ -119,6 +121,7 @@ function AddBook() {
     formData.append("category", category);
     formData.append("prices", prices);
     formData.append("location", location);
+    formData.append("userId", userId);
 
     const data = {};
 
@@ -127,9 +130,11 @@ function AddBook() {
     }
 
     console.log(data);
+    console.log("-------------------------------");
 
     await axios
-      .post("http://localhost:5000/add-product", data)
+      .post("http://localhost:5000/add-product",
+    formData)
       .then((res) => {
         console.log(res);
       })

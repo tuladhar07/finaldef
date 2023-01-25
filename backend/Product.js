@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
     condition: String, 
     publicationyr:String,
     
-    userid:String,
+    userId:String,
     location: String,
     image: String,
     prices: String,
