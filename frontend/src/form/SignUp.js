@@ -88,11 +88,11 @@ const SignUp = () => {
         'Content-Type':'application/json',
           }
     });
-    console.log(await result.json());
- 
+    const data = await result.json();
+    // console.log(data['data']['userID']);
     if(result)
-    {localStorage.setItem("user", JSON.stringify(result.result));
-    localStorage.setItem("token", JSON.stringify(result.auth));
+    {localStorage.setItem("user", JSON.stringify(data['data']));
+    // localStorage.setItem("token", JSON.stringify(result.auth));
       navigate('/login');
     }
     
