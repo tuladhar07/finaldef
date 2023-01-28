@@ -164,6 +164,8 @@ app.post("/login",async(req,resp) => {
     }
     const password = req.body.password.trim()
     const username = req.body.username.trim()
+    let user1 = await User.find({username}).select("verified")
+    if (!user1[0].verified){resp.send ({result :"USER NOT VERIFIED YET "})}
     let user = await User.find({username}).select("password")
     console.log(user);
     let checkValid = await bcrypt.compare(password, user[0].password)
@@ -233,7 +235,7 @@ app.post("/add-product", (req, resp)=>{
 
 //Verify otp email
 app.post("/verifyOTP", async(req, res )=>{
-
+console.log(res, req.body)
     try{
         let {userId, otp}= req.body;
         if (!userId||!otp){
@@ -407,5 +409,32 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
     })
 }
 
+
+app.get("/products", async(req, resp)=>{
+    let products= await Product. find ();
+    if ( products.length>0){
+        resp.send (products)
+    }else {
+        resp.send ({result:"No products found "})
+    }
+})
+
+app.get("/userdetails", async(req, resp)=>{
+    let users= await User. find ();
+    if ( users.length>0){
+        resp.send (users)
+    }else {
+        resp.send ({result:"No users found "})
+    }
+})
+
+app.get("/search/:key", async (req,resp)=> {
+let result=await Product.find ({
+    "$or": [
+        {bookname : {$regex: req.params.key}}
+    ]
+});
+resp.send(result)
+})
 
 app.listen(5000);
