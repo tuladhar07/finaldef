@@ -1,5 +1,5 @@
 import "./App.css";
-
+import OTP from "./form/otp"
 import Header from "./Header";
 import HomePage from "./HomePage";
 import Footer from "./Footer";
@@ -45,7 +45,7 @@ function App() {
       <Route path="/categories" element={<Category/>}></Route>
       <Route path="/about" element={<About/>}></Route>
       <Route path="/profile" element={<Profilepage/>}></Route>
-      
+      <Route path="/otp" element={<OTP />}></Route>
       </Routes>
         
       
