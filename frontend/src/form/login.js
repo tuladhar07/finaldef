@@ -32,7 +32,8 @@ const SignInPage = () => {
             localStorage.setItem("token", JSON.stringify(result.auth));
             navigate('/profile')
         }else{
-            alert("pleease enter correct details")}
+            alert("pleease enter correct details")} 
+         
       }
 
       const onChange = (e) => {

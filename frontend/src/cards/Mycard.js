@@ -14,7 +14,7 @@ const Mycard = (props) => {
         
         
         <div className='card_body'>
-        <img className="card_img" src={props.img}/>
+        <img src={props.img} width='100'></img>
         <div className="card_det">
         <h2 className="card_name"> {props.name}</h2>
         <p className='seller_name'>{props.seller}</p>

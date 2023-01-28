@@ -93,7 +93,7 @@ const SignUp = () => {
     if(result)
     {localStorage.setItem("user", JSON.stringify(data['data']));
     // localStorage.setItem("token", JSON.stringify(result.auth));
-      navigate('/login');
+      navigate('/otp');
     }
     
   };
