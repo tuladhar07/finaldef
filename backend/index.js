@@ -134,7 +134,7 @@ const sendOTPVerificationEmail= async ({_id, email}, resp)=>{
             status: "PENDING",
             message:"Verification OTP sent ",
             data:{
-                userID:_id,
+                _id:_id,
                 email,
             },
         });
@@ -144,6 +144,10 @@ const sendOTPVerificationEmail= async ({_id, email}, resp)=>{
         resp.json({
             status:"FAILED",
             message:error.message,
+            data:{
+                _id:_id,
+                email,
+            },
         });
     }
 }
@@ -233,7 +237,7 @@ app.post("/add-product", (req, resp)=>{
 
 //Verify otp email
 app.post("/verifyOTP", async(req, res )=>{
-
+    console.log(req.body);
     try{
         let {userId, otp}= req.body;
         if (!userId||!otp){
