@@ -32,6 +32,18 @@ const connectDB = async() =>{
 
 
 connectDB();
+//resend OTP
+app.post("/sendotp", async(req, resp)=>{
+    console.log(req.body)
+    let {_id, email}= req.body; 
+    sendOTPVerificationEmail(req.body,resp);
+    
+
+})
+
+
+
+
 app.post("/register", async (req, resp)=>{
     // resp.send(req.body);
     let {username, email,  ContactNo, password, confirmPassword }= req.body;
@@ -104,6 +116,8 @@ let transporter = nodemailer.createTransport({
 
 // send otp verification email
 const sendOTPVerificationEmail= async ({_id, email}, resp)=>{
+    
+    console.log(_id, email)
     try {
         const otp = `${Math.floor(1000+ Math.random()*9000)}`;
 
@@ -168,7 +182,9 @@ app.post("/login",async(req,resp) => {
     }
     const password = req.body.password.trim()
     const username = req.body.username.trim()
-    let user = await User.find({username}).select("password")
+    let user1 = await User.find({username}).select("verified")
+    if (!user1[0].verified){resp.send ({result :"USER NOT VERIFIED YET "})}
+    let user = await User.find({username}).select("password").select("email")
     console.log(user);
     let checkValid = await bcrypt.compare(password, user[0].password)
     console.log(checkValid)
@@ -237,14 +253,16 @@ app.post("/add-product", (req, resp)=>{
 
 //Verify otp email
 app.post("/verifyOTP", async(req, res )=>{
+console.log(res, req.body)
     console.log(req.body);
     try{
-        let {userId, otp}= req.body;
-        if (!userId||!otp){
+        let {_id, otp}= req.body;
+        if (!_id||!otp){
             throw Error ("Empty otp details  are not allowed");
 
         }else {
-            const USerOTPVerificationRecords= await UserOTPVerification.find ({
+            const userId=_id
+            const USerOTPVerificationRecords= await UserOTPVerification.find({
                 userId, 
             });
             if (USerOTPVerificationRecords.length<= 0){
@@ -257,7 +275,7 @@ app.post("/verifyOTP", async(req, res )=>{
             }  else {
                 //user otp record exists
                 const { expiresAt }= USerOTPVerificationRecords[0];
-                const hashedOTP= USerOTPVerificationRecords[0].otp;
+                const hashedOTP= USerOTPVerificationRecords[USerOTPVerificationRecords.length-1].otp;
             
                 if (expiresAt< Date.now()){
                     // user otp record has expired
@@ -272,7 +290,10 @@ app.post("/verifyOTP", async(req, res )=>{
 
                     if (!validOTP){
                         //supplied otp is wrong 
-                        throw new Error("Invalid code passed. Check your inbox .");
+                        res.json({
+                            status: "VEFIRICATION FAILED",
+                            message:"Wront OTP. Please Recheck",
+                        });
                     }else {
                         //success
                         await User.updateOne({_id: userId}, {verified: true});
@@ -410,6 +431,35 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
         });
     })
 }
+
+
+app.get("/products", async(req, resp)=>{
+    let products= await Product. find ();
+    if ( products.length>0){
+        resp.send (products)
+    }else {
+        resp.send ({result:"No products found "})
+    }
+})
+
+app.get("/userdetails", async(req, resp)=>{
+    let users= await User. find ();
+    if ( users.length>0){
+        resp.send (users)
+    }else {
+        resp.send ({result:"No users found "})
+    }
+})
+
+app.get("/search/:key", async (req,resp)=> {
+let result=await Product.find ({
+    "$or": [
+        {bookname : {$regex: req.params.key}}
+    ]
+});
+resp.send(result)
+})
+
 
 
 app.listen(5000);

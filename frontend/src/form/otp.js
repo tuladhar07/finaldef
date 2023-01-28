@@ -7,17 +7,41 @@ function OTP() {
     const navigate=useNavigate();
       const [otp,setOtp]=useState('')
       
-      const changeOTP =(e)=>{
+      const changeOTP =async(e)=>{
             setOtp(e.target.value);
             e.preventDefault();
+            
+   
             console.log(otp);
+            
+        };
+        //RESEND OTP KO KAM
+        const resendotp = async (e) => {
+          e.preventDefault();
+          const _id = localStorage.getItem('_id');
+          const email = localStorage.getItem('email');
+          const values = {_id, email}
+          console.log(values)
+          const result = await fetch('http://localhost:5000/sendotp', {
+            method: 'POST',
+            body: JSON.stringify(values),
+            headers: {
+              'Content-Type':'application/json',
+                }
+          });
+          const data = await result.json();
+          console.log(data);
+          
+        navigate('/otp');
+          
+          
         };
 
 
       const handleOTP = async (e) =>{
         e.preventDefault();
-        const userId = localStorage.getItem('_id');
-        const values = {userId, otp}
+        const _id = localStorage.getItem('_id');
+        const values = {_id, otp}
         const result = await fetch('http://localhost:5000/verifyOTP', {
         method: 'POST',
         body: JSON.stringify(values),
@@ -25,7 +49,8 @@ function OTP() {
           'Content-Type':'application/json',
             }
       });
-
+      const data = await result.json();
+      console.log(data);
       navigate('/login');
       }
   return (
@@ -41,8 +66,8 @@ function OTP() {
             </p>
 
 
-
-      <button id="sub_btn" type="submit" className="btn_login" >Submit</button> 
+            <button id="sub_btn" type="button" className="btn_login" onClick={resendotp} >Resend Email</button>
+      <button id="sub_btn" type="submit" className="btn_login"  >Submit</button> 
 
         </form>
 

@@ -27,12 +27,16 @@ const SignInPage = () => {
         });
         result=await result.json();
         console.warn (result)
-        if (result.auth  ){
-            localStorage.setItem("user", JSON.stringify(result.user));
-            localStorage.setItem("token", JSON.stringify(result.auth));
-            navigate('/profile')
+
+          if (result.auth) {
+              localStorage.setItem('_id', result.user[0]._id);
+              
+              localStorage.setItem('email', result.user[0].email)
+              localStorage.setItem("token", JSON.stringify(result.auth));
+              navigate('/profile')
         }else{
-            alert("pleease enter correct details")}
+            alert("pleease enter correct details")} 
+         
       }
 
       const onChange = (e) => {
