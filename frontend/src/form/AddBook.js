@@ -1,94 +1,3 @@
-// import React, { useState } from "react";
-// import "./AddBook.css";
-// import HeaderTwo from "../HeaderTwo";
-// import Footer from "../Footer";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// function AddBook() {
-//   const [selectedFile, setSelectedFile] = useState();
-//   const [image, setImage] = useState("");
-//   const [bookname, setBookName] = useState("");
-//   const [author, setAuthor] = useState("");
-//   const [condition, setCondition] = useState("");
-//   const [publicationyr, setPublicationyr] = useState("");
-//   const [prices, setPrices] = useState("");
-//   const [category, setCategory] = useState("");
-//   const [location, setLocation] = useState("");
-//   const addProduct=()=>{
-//     console.warn(bookname, author, condition, publicationyr, prices, category);
-//     const userId= JSON.parse(localStorage.getItem('user'));
-//     console.warn(userId._id);
-//   }
-
-//   const handleApi = async (e) => {
-//     const formData = new FormData();
-
-//     formData.append("file", selectedFile);
-//     formData.append("bookname", bookname);
-//     formData.append("author", author);
-//     formData.append("condition", condition);
-//     formData.append("publicationyr", publicationyr);
-//     formData.append("category", category);
-//     formData.append("prices", prices);
-//     formData.append("location", location);
-//     console.log(e.target.files);
-//     for (const value of formData.entries()) {
-//       console.log(value);
-//     }
-
-//     const handleSubmit = async (e) => {
-//       e.preventDefault();
-       
-//       const value = await fetch('http://localhost:5000/add-product', {
-//         method: 'POST',
-//         body: JSON.stringify(value),
-//         headers: {
-//           'Content-Type':'application/json',
-//             }
-//       });
-//       console.log(await value.json());};
-//     // };}
-
-// export default AddBook;
-// import React, { useState } from "react";
-// import "./AddBook.css";
-// import HeaderTwo from "../HeaderTwo";
-// import Footer from "../Footer";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// function AddBook() {
-//   const [selectedFile, setSelectedFile] = useState("");
-//   const [image, setImage] = useState("");
-//   const [bookname, setBookName] = useState("");
-//   const [author, setAuthor] = useState("");
-//   const [condition, setCondition] = useState("");
-//   const [publicationyr, setPublicationyr] = useState("");
-//   const [prices, setPrices] = useState("");
-//   const [category, setCategory] = useState("");
-//   const [location, setLocation] = useState("");
-  
-  //const addProduct=()=>{
-        //console.warn(bookname, author, condition, publicationyr, prices, category);
-        //const userId= JSON.parse(localStorage.getItem('user'))[0]._id;
-        //console.log(userId._id);
-      //}
-  // const handleApi = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-
-  //   formData.append("file", selectedFile);
-  //   formData.append("bookname", bookname);
-  //   formData.append("author", author);
-  //   formData.append("condition", condition);
-  //   formData.append("publicationyr", publicationyr);
-  //   formData.append("category", category);
-  //   formData.append("prices", prices);
-  //   formData.append("location", location);
-   // formData.append("userId", userId);
-
-//     
 import React, { useState } from "react";
 import "./AddBook.css";
 import HeaderTwo from "../HeaderTwo";
@@ -107,7 +16,7 @@ function AddBook() {
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
 
-  const userId= JSON.parse(localStorage.getItem('user'))[0]._id;
+  const userId = localStorage.getItem('_id');
 
   const handleApi = async (e) => {
     e.preventDefault();

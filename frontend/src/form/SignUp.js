@@ -89,11 +89,14 @@ const SignUp = () => {
           }
     });
     const data = await result.json();
+    console.log(data);
     // console.log(data['data']['userID']);
     if(result)
-    {localStorage.setItem("user", JSON.stringify(data['data']));
+    {
+      localStorage.setItem('_id', data['data']['_id'])
+      localStorage.setItem('email', data['data']['email'])
     // localStorage.setItem("token", JSON.stringify(result.auth));
-      navigate('/login');
+      navigate('/otp');
     }
     
   };

@@ -1,23 +1,33 @@
 import React , {useState, Component} from 'react';
 import './login.css';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 
 function OTP() {
-
-    const [otp,setOtp]=useState('')
-
-
-
-
-
-        const handleOTP =(e)=>{
-setOtp(e.target.value);
-
-
+    const navigate=useNavigate();
+      const [otp,setOtp]=useState('')
+      
+      const changeOTP =(e)=>{
+            setOtp(e.target.value);
             e.preventDefault();
             console.log(otp);
         };
+
+
+      const handleOTP = async (e) =>{
+        e.preventDefault();
+        const userId = localStorage.getItem('_id');
+        const values = {userId, otp}
+        const result = await fetch('http://localhost:5000/verifyOTP', {
+        method: 'POST',
+        body: JSON.stringify(values),
+        headers: {
+          'Content-Type':'application/json',
+            }
+      });
+
+      navigate('/login');
+      }
   return (
     <div>
     <>
@@ -27,7 +37,7 @@ setOtp(e.target.value);
         <form className="login_f" onSubmit={handleOTP}>
             <p>
                 <label>Enter OTP Code</label><br/>
-                <input type="text"  name="otp" required  onChange={handleOTP}/>
+                <input type="text"  name="otp" required  onChange={changeOTP}/>
             </p>
 
 
