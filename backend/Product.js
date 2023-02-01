@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
     bookname: String,
     author: String,
-    bookname : String,
-    author: String ,
     condition: String, 
     publicationyr:String,
-    price: String,
-    location: String
+    
+    userId:String,
+    location: String,
+    image: String,
+    prices: String,
 
 
 });

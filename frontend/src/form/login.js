@@ -2,19 +2,20 @@ import React ,{ useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import HeaderTwo from '../HeaderTwo'
 import Footer from '../Footer'
+//import bycrpt from 'bcrypt.js'
 import './login.css'
-
-
 const SignInPage = () => {
     const navigate=useNavigate();
     const [values, setValues] = useState({
         username: "",
-        password: ""
+        password: "",
+        verify:""
       });
 
-
+    
       const handleLogin = async (e) => {
         e.preventDefault();
+    
         console.log(values);
       
         let result=await fetch ('http://localhost:5000/login', {
@@ -26,11 +27,16 @@ const SignInPage = () => {
         });
         result=await result.json();
         console.warn (result)
-        if (result.username ){
-            localStorage.setItem("user", JSON.stringify(result));
-            navigate('/')
+
+          if (result.auth) {
+              localStorage.setItem('_id', result.user[0]._id);
+              
+              localStorage.setItem('email', result.user[0].email)
+              localStorage.setItem("token", JSON.stringify(result.auth));
+              navigate('/profile')
         }else{
-            alert("pleease enter correct details")}
+            alert("pleease enter correct details")} 
+         
       }
 
       const onChange = (e) => {
