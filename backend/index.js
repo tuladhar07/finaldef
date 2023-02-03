@@ -432,9 +432,14 @@ const sendResetEmail = ({_id, email}, redirectUrl, res)=>{
     })
 }
 
-
-app.get("/products", async(req, resp)=>{
-    let products= await Product. find ();
+//display list of products
+app.get("/products/:userId", async(req, resp)=>{
+  
+    console.log(req.params.userId.trim())
+    let products= await Product.find ( {"$or": [ {userId : {$regex: req.params.userId.trim()}}
+    ]
+ });
+    console.log(products)
     if ( products.length>0){
         resp.send (products)
     }else {
@@ -442,19 +447,33 @@ app.get("/products", async(req, resp)=>{
     }
 })
 
-app.get("/userdetails", async(req, resp)=>{
-    let users= await User. find ();
+//delete product
+app.delete("/product/:id", async(req,resp)=>{
+    const result= await Product.deleteOne({_id:req.params.id})
+   
+    resp.send(result);
+});
+
+
+//userdetails dekhauna
+app.get("/userdetails/:userId", async(req, resp)=>{
+  
+    console.log(req.params.userId.trim())
+    let users= await User.find ( {"$or": [ {userId : {$regex: req.params.userId.trim()}}
+    ]
+ });
+    console.log(users)
     if ( users.length>0){
         resp.send (users)
     }else {
-        resp.send ({result:"No users found "})
+        resp.send ({result:"No user found "})
     }
 })
 
 app.get("/search/:key", async (req,resp)=> {
 let result=await Product.find ({
     "$or": [
-        {bookname : {$regex: req.params.key}}
+        {bookname : {$regex:req.params.key.trim(), $options:'i'}}
     ]
 });
 resp.send(result)
