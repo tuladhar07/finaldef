@@ -16,6 +16,7 @@ import About from "./About";
 import Profilepage from "./profile/ProfilePage";
 import HeaderTwoPage from "./HeaderTwoPage";
 import PrivateComponent from "./privatecomponent";
+import SearchResult from "./Search";
 import {
   BrowserRouter as Router,
   Route,
@@ -46,6 +47,8 @@ function App() {
       <Route path="/about" element={<About/>}></Route>
       <Route path="/profile" element={<Profilepage/>}></Route>
       <Route path="/otp" element={<OTP />}></Route>
+      <Route path="/search" element={<SearchResult />}></Route>
+      
       </Routes>
         
       

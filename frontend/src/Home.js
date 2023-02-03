@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import banner from './components/banner.png';
 // import Imagecarousel from './Imagecarousel';
@@ -31,7 +32,8 @@ function Home() {
       overlayRef.current.style.width = '0%';
     };
 
-
+    const [search, setSearch] = useState("");
+    const navigate= useNavigate();
 
 
 
@@ -71,17 +73,18 @@ function Home() {
           </button>
           <div className='fullscreen_overlay-content'>
             <form>
-              <input id="search"
-                type='text'
+              <input
+              onChange={(e) => {
+                setSearch(e.target.value)
+                }}
+               id="search"
+                type='search'
                 placeholder='What are you looking for...?'
                 className='fullscreen_search-input'
              ></input>
               <button
                 className='fullscreen_search-button'
-                onClick={() => {
-                  console.log(document.getElementById("search").value);
-                  /* Your search logic here */
-                }} 
+                onClick={() => navigate(`/search?query=${search}`)}
               >
                 Search
               </button>
