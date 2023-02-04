@@ -1,6 +1,6 @@
 import book4 from "../components/book4.jpg";
 import "./details.css";
-import Detailscarousel from "./Detailscarousel";
+import Detailscard from "./Detailscard";
 import Detailscarouseltwo from "./Detailscarouseltwo";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 const Details = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchUsers, setUserResults] = useState([]);
+  const [searchSimilarBooks, setSimilarBooks] = useState([]);
   const [error, setError] = useState(false);
   const location = useLocation();
   const key = new URLSearchParams(location.search).get("key");
@@ -17,6 +18,7 @@ const Details = () => {
   useEffect(() => {
     searchProduct();
     searchUploader();
+    SimilarBooks();
   }, []);
 
   const searchProduct = async () => {
@@ -33,6 +35,14 @@ const Details = () => {
     result = await result.json();
     if (result) {
       setUserResults(result);
+    }
+  };
+  const SimilarBooks = async () => {
+    console.log(userId);
+    let result = await fetch(`http://localhost:5000/products/${userId}`);
+    result = await result.json();
+    if (result) {
+      setSimilarBooks(result);
     }
   };
 
@@ -87,10 +97,24 @@ const Details = () => {
       <br />
       <div className="Container1">
         <h2 className="det_pri">Other uploads by Koshish</h2>
+        {searchSimilarBooks.map((similardetails, index) => (
+          <p> {similardetails.bookname} </p>
+        ))}
         <br />
       </div>
 
-      <Detailscarousel />
+      {/*<div className="details-product-container">
+        <div className="details_card_cat">
+          {searchSimilarBooks.map((similardetails, index) => (
+            <Detailscard
+              name={similardetails.bookname}
+              // img={book5}
+              seller={similardetails.author}
+              price={similardetails.price}
+            />
+          ))}
+        </div>
+          </div>*/}
       <hr />
       <br />
       <div className="Container2">
