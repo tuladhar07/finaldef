@@ -1,6 +1,6 @@
 import "./App.css";
 import OTP from "./form/otp"
-import Header from "./Header";
+import Header from "./headers/Header";
 import HomePage from "./HomePage";
 import Footer from "./Footer";
 import PlusTwo from "./cards/PlusTwo";
@@ -14,7 +14,8 @@ import Entrance from "./cards/Entrance";
 import Category from "./Category";
 import About from "./About";
 import Profilepage from "./profile/ProfilePage";
-import HeaderTwoPage from "./HeaderTwoPage";
+import HeaderTwoPage from "./headers/HeaderTwoPage";
+
 import PrivateComponent from "./privatecomponent";
 import SearchResult from "./Search";
 import {

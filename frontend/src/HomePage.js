@@ -2,8 +2,8 @@ import React from 'react'
 import Home from './Home';
 import About from './About';
 import Category from './Category';
-import HeaderTwo from './HeaderTwo';
-import Header from './Header';
+import HeaderTwo from './headers//HeaderTwo';
+import Header from './headers/Header';
 import Footer from './Footer';
 
 const HomePage = () => {

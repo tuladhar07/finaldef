@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from './components/logo.png'
+import logo from '../components/logo.png'
 import "./Header.css"
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";

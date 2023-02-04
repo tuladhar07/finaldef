@@ -2,7 +2,7 @@ import React from 'react';
 import "./profilepage.css";
 import photo from "../components/3135823.png"
 import ProfilePageCarousel from "./ProfilePageCarousel";
-import HeaderTwo from '../HeaderTwo';
+import HeaderTwo from '../headers/HeaderTwo';
 import Footer from '../Footer';
 import { Link } from 'react-router-dom';
 
@@ -28,7 +28,7 @@ const Profile =() => {
     <div className='left_container_profile'> 
       
       
-      < Details username={'Koshish Shrestha'} number={9811122233} address={'Kalimati, Kathmandu'}/>
+      <Details username={'Koshish Shrestha'} number={9811122233} address={'Kalimati, Kathmandu'}/>
       <button type="submit" className="update_profile">Update Profile</button>
 
       

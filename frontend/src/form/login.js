@@ -1,6 +1,6 @@
 import React ,{ useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import HeaderTwo from '../HeaderTwo'
+import HeaderTwo from '../headers//HeaderTwo'
 import Footer from '../Footer'
 //import bycrpt from 'bcrypt.js'
 import './login.css'
