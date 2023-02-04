@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Mycard from "../cards/Mycard.js";
 import books from "../components/books.png";
@@ -20,21 +19,20 @@ const Imagecarousel = () => {
   }, []);
 
   const getData = async () => {
-    const _id = localStorage.getItem('_id');
-    const result = await axios.get('http://localhost:5000/products/'+_id);
-    console.log(result)
+    const _id = localStorage.getItem("_id");
+    const result = await axios.get("http://localhost:5000/products/" + _id);
+    console.log(result);
     setApiData(result.data).then((getData) => {
-      
       setApiData(getData.data);
-      
     });
   };
 
   return (
     <div className="product-container">
-      
       {apiData.map((book, index) => (
         <Mycard
+        userId={book.userId}
+          id={book._id}
           name={book.bookname}
           img={book.image}
           seller={book.author}
@@ -43,7 +41,6 @@ const Imagecarousel = () => {
         />
       ))}
     </div>
-
   );
 };
 
