@@ -13,7 +13,7 @@ const Details = () => {
   const location = useLocation();
   const key = new URLSearchParams(location.search).get("key");
   const userId = new URLSearchParams(location.search).get("userId");
-
+  console.log(userId);
   const { slug } = useParams();
   useEffect(() => {
     searchProduct();

@@ -19,7 +19,7 @@ const Mycard = (props) => {
           <button
             className="card_btn"
             onClick={() =>
-              navigate(`/details?key=${props.id}?userId=${props.userId}`)
+              navigate(`/details?key=${props.id}&userId=${props.userId}`)
             }
           >
             View Details

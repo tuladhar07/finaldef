@@ -406,9 +406,10 @@ app.delete("/product/:id", async (req, resp) => {
 
 //userdetails dekhauna
 app.get("/userdetails/:userId", async (req, resp) => {
+  
   console.log(req.params.userId.trim());
   let users = await User.find({
-    $or: [{ userId: { $regex: req.params.userId.trim() } }],
+    $or: [{ _id: req.params.userId.trim()  }],
   });
   console.log(users);
   if (users.length > 0) {

@@ -8,7 +8,7 @@ import { Link as Link2 , useNavigate} from 'react-router-dom';
 
 
 const Header=()=> {
-const auth=localStorage.getItem('user');
+const auth=localStorage.getItem('_id');
 const navigate=useNavigate();
 const logout=()=>{
  localStorage.clear();
@@ -35,9 +35,10 @@ const logout=()=>{
        <SearchIcon className='header_searchIcon' onClick={addSearchData}/>
     
        </div>
-       <li>{ auth ? <Link2 onClick={logout} to="/login"> Logout </Link2> :
-         <Link2 to ="/login"> <PersonIcon className='header_personIcon'/> </Link2>}</li>
-      </div>
+       { auth ? <Link2 onClick={logout} to="/login"> Logout </Link2>  :
+        <Link2 to ="/login"> <PersonIcon className='header_personIcon'/> </Link2>} 
+             </div>
+      
 
     </div>
   )
