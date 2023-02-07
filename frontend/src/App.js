@@ -1,5 +1,5 @@
 import "./App.css";
-import OTP from "./form/otp"
+import OTP from "./form/otp";
 import Header from "./headers/Header";
 import HomePage from "./HomePage";
 import Footer from "./Footer";
@@ -14,6 +14,7 @@ import Entrance from "./cards/Entrance";
 import Category from "./Category";
 import About from "./About";
 import Profilepage from "./profile/ProfilePage";
+import UpdateBook from "./profile/UpdateBook";
 import HeaderTwoPage from "./headers/HeaderTwoPage";
 
 import PrivateComponent from "./privatecomponent";
@@ -25,36 +26,33 @@ import {
   Routes,
   BrowserRouter,
 } from "react-router-dom";
-
-
+import { Update } from "@mui/icons-material";
 
 function App() {
   return (
-      <div className="App">
-      <Header/>
-  <Routes>
-      <Route path="/" element={<HomePage />}></Route>
-    
-  
-      <Route path="/plustwoo" element={<PlusTwo />}></Route>
-      <Route path="/signup" element={<SignUp/>}></Route>
-      <Route path="/login" element={<Login/>}></Route>
-      <Route path="/addbook" element={<AddBook/>}></Route>
-      <Route path="/details" element={<Details/>}></Route>
-      <Route path="/bachelors" element={<Bachelors/>}></Route>
-      <Route path="/entrance" element={<Entrance/>}></Route>
-      <Route path="/school" element={<School/>}></Route>
-      <Route path="/categories" element={<Category/>}></Route>
-      <Route path="/about" element={<About/>}></Route>
-      <Route path="/profile" element={<Profilepage/>}></Route>
-      <Route path="/otp" element={<OTP />}></Route>
-      <Route path="/search" element={<SearchResult />}></Route>
-      
+    <div className="App">
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+
+        <Route path="/plustwoo" element={<PlusTwo />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/addbook" element={<AddBook />}></Route>
+        <Route path="/details" element={<Details />}></Route>
+        <Route path="/bachelors" element={<Bachelors />}></Route>
+        <Route path="/entrance" element={<Entrance />}></Route>
+        <Route path="/school" element={<School />}></Route>
+        <Route path="/categories" element={<Category />}></Route>
+        <Route path="/about" element={<About />}></Route>
+        <Route path="/profile" element={<Profilepage />}></Route>
+        <Route path="/otp" element={<OTP />}></Route>
+        <Route path="/search" element={<SearchResult />}></Route>
+        <Route path="/updatebook/:id" element={<UpdateBook />}></Route>
       </Routes>
-        
-      
-<Footer/>
-      </div>
+
+      <Footer />
+    </div>
   );
 }
 

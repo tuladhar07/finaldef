@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import "./AddBook.css";
+import React, { useState, useEffect } from "react";
+import "../form//AddBook.css";
 import HeaderTwo from "../headers//HeaderTwo";
 import Footer from "../Footer";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-function AddBook() {
+function UpdateBook() {
   const [selectedFile, setSelectedFile] = useState("");
   const [image, setImage] = useState("");
   const [bookname, setBookName] = useState("");
@@ -15,11 +15,33 @@ function AddBook() {
   const [prices, setPrices] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getBookDetailsforUpdate();
+  }, []);
+
+  const getBookDetailsforUpdate = async () => {
+    console.warn(params);
+    let result = await fetch(`http://localhost:5000/product/${params.id}`);
+    result = await result.json();
+    console.warn(result);
+    setBookName(result.bookname);
+    setAuthor(result.author);
+    setCondition(result.condition);
+    setPublicationyr(result.publicationyr);
+    setPrices(result.prices);
+    setCategory(result.category);
+    setLocation(result.location);
+    setSelectedFile(result.selectedFile);
+  };
 
   const userId = localStorage.getItem("_id");
 
   const handleApi = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
 
     formData.append("image", selectedFile);
@@ -40,17 +62,38 @@ function AddBook() {
 
     console.log(data);
     console.log("-------------------------------");
+    let result = await fetch(`http://localhost:5000/product/${params.id}`, {
+      method: "Put",
+      body: JSON.stringify({
+        bookname,
+        author,
+        condition,
+        publicationyr,
+        category,
+        prices,
+        location,
+        Image,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    await axios
-      .post("http://localhost:5000/add-product", formData)
-      .then((res) => {
-        console.log(res);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
+    result = await result.json();
+    console.warn(result);
+    navigate("/profile");
   };
+
+  // await axios
+  //   .post(`http://localhost:5000/product/${params.id}`, formData)
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  //   };
 
   const handleImageChange = (e) => {
     console.log(e.target.files);
@@ -60,7 +103,7 @@ function AddBook() {
   return (
     <>
       <div className="box">
-        <h1 className="add_tit">Add a new book</h1>
+        <h1 className="add_tit">Update Book Details</h1>
         <form className="addbook_f" onSubmit={handleApi}>
           <div className="name">
             <label>Book Name</label>
@@ -136,8 +179,8 @@ function AddBook() {
           <div className="image">
             <input type="file" name="file" onChange={handleImageChange} />
 
-            <button type="submit" className="uploadbtn" onChange={handleApi}>
-              Upload!
+            <button type="submit" className="uploadbtn" onC={handleApi}>
+              Update
             </button>
           </div>
         </form>
@@ -146,4 +189,4 @@ function AddBook() {
   );
 }
 
-export default AddBook;
+export default UpdateBook;

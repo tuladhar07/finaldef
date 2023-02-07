@@ -32,6 +32,7 @@ const ProfilePagecarousel = () => {
         <div className="product-container-prof">
           {apiData.map((profilebook, index) => (
             <Profilecard
+            id={profilebook._id}
               name={profilebook.bookname}
               price={profilebook.price}
               author={profilebook.author}
