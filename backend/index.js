@@ -406,10 +406,9 @@ app.delete("/product/:id", async (req, resp) => {
 
 //userdetails dekhauna
 app.get("/userdetails/:userId", async (req, resp) => {
-  
   console.log(req.params.userId.trim());
   let users = await User.find({
-    $or: [{ _id: req.params.userId.trim()  }],
+    $or: [{ _id: req.params.userId.trim() }],
   });
   console.log(users);
   if (users.length > 0) {
@@ -433,5 +432,27 @@ app.get("/bookdetails/:key", async (req, resp) => {
   resp.send(result);
 });
 
+//update the book
+
+app.get("/product/:id", async (req, resp) => {
+  let result = await Product.findOne({ _id: req.params.id });
+  if (result) {
+    resp.send(result);
+  } else {
+    resp.send({ result: "No Record Found." });
+  }
+});
+
+app.put("/product/:id", async (req, resp) => {
+  let result = await Product.updateOne(
+    {
+      _id: req.params.id,
+    },
+    {
+      $set: req.body,
+    }
+  );
+  resp.send(result);
+});
+
 app.listen(5000);
- 
