@@ -201,6 +201,7 @@ app.post("/add-product", (req, resp) => {
       author: fields.author[0],
       condition: fields.condition[0],
       publicationyr: fields.publicationyr[0],
+      category: fields.category[0],
       prices: fields.prices[0],
       userId: fields.userId[0],
       image: imageURL,
@@ -398,13 +399,6 @@ app.get("/products/:userId", async (req, resp) => {
 });
 
 
-//display list of category wise products
-app.get("/search/:key", async (req, resp) => {
-  let result = await Product.find({
-    $or: [{ category: { $regex: req.params.key.trim(), $options: "i" } }],
-  });
-  resp.send(result);
-});
 
 
 
@@ -433,6 +427,20 @@ app.get("/search/:key", async (req, resp) => {
   let result = await Product.find({
     $or: [{ bookname: { $regex: req.params.key.trim(), $options: "i" } }],
   });
+ 
+  resp.send(result);
+});
+
+
+//category search
+app.get("/category/:key", async (req, resp) => {
+  console.log(req.body)
+  console.log(resp.body)
+  let result = await Product.find({
+    
+    $or: [{ category: { $regex: req.params.key.trim(), $options: "i" } }],
+  });
+  
   resp.send(result);
 });
 

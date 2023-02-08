@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
     author: String,
     condition: String, 
     publicationyr:String,
-    
+    category:String,
     userId:String,
     location: String,
     image: String,

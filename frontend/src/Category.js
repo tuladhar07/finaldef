@@ -12,10 +12,21 @@ const Category = () => {
   const navigate = useNavigate();
 
   const BachelorsCat = () => {
-    navigate({
-      pathname: "/bachelors",
-      search: `?key=bachelor`,
-    });
+    navigate(`/bachelors?key=bachelors`);
+
+    // const BachelorsCat = () => {
+    //   navigate(`/bachelors?key=bachelors`);
+
+    //   const BachelorsCat = () => {
+    //     navigate(`/bachelors?key=bachelors`);
+
+    //     const BachelorsCat = () => {
+    //       navigate(`/bachelors?key=bachelors`);
+
+    // navigate({
+    //   pathname: "/bachelors",
+    //   search: `?key=bachelors`,
+    // });
   };
   return (
     <div id="category">
