@@ -36,7 +36,9 @@ const logout=()=>{
     
        </div>
        { auth ? <Link2 onClick={logout} to="/login"> Logout </Link2>  :
-        <Link2 to ="/login"> <PersonIcon className='header_personIcon'/> </Link2>} 
+        <Link2 to ="/login"> <PersonIcon className='header_personIcon'/> </Link2>}
+        { auth ? <Link2  to="/profile"> profile</Link2>  :
+        <Link2 to ="/profile">  </Link2>} 
              </div>
       
 

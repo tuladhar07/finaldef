@@ -34,7 +34,8 @@ function UpdateBook() {
     setPrices(result.prices);
     setCategory(result.category);
     setLocation(result.location);
-    setSelectedFile(result.selectedFile);
+    setSelectedFile(result.SelectedFile);
+    setImage(result.imageURL);
   };
 
   const userId = localStorage.getItem("_id");
@@ -62,7 +63,7 @@ function UpdateBook() {
 
     console.log(data);
     console.log("-------------------------------");
-    let result = await fetch(`http://localhost:5000/product/${params.id}`, {
+    let result = await fetch(`http://localhost:5000/uproduct/${params.id}`, {
       method: "Put",
       body: JSON.stringify({
         bookname,
@@ -73,6 +74,7 @@ function UpdateBook() {
         prices,
         location,
         Image,
+        
       }),
       headers: {
         "Content-Type": "application/json",

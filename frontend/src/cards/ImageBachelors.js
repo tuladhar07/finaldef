@@ -20,7 +20,7 @@ const Imagecarousel = () => {
 
   const getData = async () => {
     const _id = localStorage.getItem("_id");
-    const result = await axios.get("http://localhost:5000/products/" + _id);
+    const result = await axios.get("http://localhost:5000/products/" + "bachelor");
     console.log(result);
     setApiData(result.data).then((getData) => {
       setApiData(getData.data);

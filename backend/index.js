@@ -397,6 +397,17 @@ app.get("/products/:userId", async (req, resp) => {
   }
 });
 
+
+//display list of category wise products
+app.get("/search/:key", async (req, resp) => {
+  let result = await Product.find({
+    $or: [{ category: { $regex: req.params.key.trim(), $options: "i" } }],
+  });
+  resp.send(result);
+});
+
+
+
 //delete product
 app.delete("/product/:id", async (req, resp) => {
   const result = await Product.deleteOne({ _id: req.params.id });
@@ -442,8 +453,8 @@ app.get("/product/:id", async (req, resp) => {
     resp.send({ result: "No Record Found." });
   }
 });
-
-app.put("/product/:id", async (req, resp) => {
+//update  garna lai
+app.put("/uproduct/:id", async (req, resp) => {
   let result = await Product.updateOne(
     {
       _id: req.params.id,

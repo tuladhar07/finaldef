@@ -22,10 +22,10 @@ const Profilecard = (props) => {
             <p className="profseller_name">{props.seller}</p>
             <p className="profcard_price">{props.price}</p>
           </div>
-          <Link to="/details">
+          
             {" "}
-            <button className="profcard_btn">Edit Details</button>{" "}
-          </Link>
+            <Link to={"/updatebook/" + props.id}> <button className="profcard_btn">Edit Details</button>{" "}</Link>
+          
           <button
             className="delete_btn"
             onClick={() => deleteProduct(props.id)}
@@ -33,7 +33,7 @@ const Profilecard = (props) => {
             Delete post
           </button>
 
-          <Link to={"/updatebook/" + props.id}>Update</Link>
+          
         </div>
       </div>
     </div>
