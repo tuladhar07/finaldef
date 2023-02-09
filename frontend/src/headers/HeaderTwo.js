@@ -1,13 +1,23 @@
-import React from 'react'
+import React,{useState} from 'react'
 import logo from '../components/logo.png'
 import "./Header.css"
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import { Link as Link1 } from 'react-scroll';
-import { Link as Link2 } from 'react-router-dom';
+import { Link as Link2,useNavigate } from 'react-router-dom';
 
 
 function HeaderTwo() {
+  const navigate=useNavigate();
+  const [search, setSearch] = useState("");
+  
+const handleClick = (e) => {
+  
+  navigate(`/search?key=${search}`);
+  window.location.reload(true)
+  
+};
+
    
   return (
     <div className='header'>
@@ -23,9 +33,13 @@ function HeaderTwo() {
       </div>
       <div className="header_icons">
       <div className="searchIcon_main">
-      <input id="search" type="text" className="searchText" placeholder="    Type to search.."></input>
+      <input id="search" type="text"  
+      onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                   className="searchText" placeholder="    Type to search.."></input>
    
-       <SearchIcon className='header_searchIcon' onClick={addSearchData}/>
+       <SearchIcon className='header_searchIcon' onClick={handleClick}/>
     
        </div>
     <Link2 to ="/login"> <PersonIcon className='header_personIcon'/> </Link2>
@@ -37,11 +51,5 @@ function HeaderTwo() {
 
 export default HeaderTwo
 
-const addSearchData=()=>
-{
-    console.log(document.getElementById('search').value);
-   
-
-}
 
 

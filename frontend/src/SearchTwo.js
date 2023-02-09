@@ -5,7 +5,7 @@ import ImageBachelors from "./cards/ImageBachelors";
 import "./cards/plustwo.css";
 import Mycard from "./cards/Mycard";
 
-const SearchResult = () => {
+const SearchResultTwo = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(false);
   const location = useLocation();
@@ -58,4 +58,4 @@ const SearchResult = () => {
     </div>
   );
 };
-export default SearchResult;
+export default SearchResultTwo;

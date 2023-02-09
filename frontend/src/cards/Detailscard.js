@@ -1,8 +1,10 @@
 import React from "react";
 import "./detailscard.css";
 import Details from "./Details";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 const Detailscard = (props) => {
+  const navigate = useNavigate();
+
   return (
     <div className="det_main">
       <div className="det_body">
@@ -11,14 +13,18 @@ const Detailscard = (props) => {
           <h2 className="det_name"> {props.name}</h2>
           <p className="det_sell">By {props.seller}</p>
           <p className="det_price">{props.price}</p>
-
-          <Link to="/details">
-            {" "}
-            <button className="det_card_btn">View Details</button>{" "}
-          </Link>
+          </div>{" "}
+          <button
+            className="card_btn"
+            onClick={() =>
+              navigate(`/details?key=${props.id}&userId=${props.userId}`)
+            }
+          >
+            View Details
+          </button>{" "}
         </div>
       </div>
-    </div>
+    
   );
 };
 

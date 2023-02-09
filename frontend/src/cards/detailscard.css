@@ -1,7 +1,7 @@
 .det_body
 {   height: 200px;
 
- 
+
     
     display: grid;
      grid-template-columns:40% 60%;
@@ -22,7 +22,7 @@
 
 .det_main
 {
-  
+ 
     margin-bottom: 30px;
     background-color:  rgb(255,165,0,0.4);
   

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import logo from '../components/logo.png'
 import "./Header.css"
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,6 +14,13 @@ const logout=()=>{
  localStorage.clear();
  navigate('/signup')
 }
+const [search, setSearch] = useState("");
+const handleClick = (e) => {
+
+  navigate(`/search?key=${search}`);
+  window.location.reload(true)
+};
+
    
   return (
     <div className='header'>
@@ -30,9 +37,11 @@ const logout=()=>{
       </div>
       <div className="header_icons">
       <div className="searchIcon_main">
-      <input id="search" type="text" className="searchText" placeholder="    Type to search.."></input>
+      <input id="search" type="text"  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }} className="searchText" placeholder="    Type to search.."></input>
    
-       <SearchIcon className='header_searchIcon' onClick={addSearchData}/>
+       <SearchIcon className='header_searchIcon' onClick={handleClick}/>
     
        </div>
        { auth ? <Link2 onClick={logout} to="/login"> Logout </Link2>  :
@@ -50,11 +59,11 @@ const logout=()=>{
 
 export default Header
 
-const addSearchData=()=>
-{
-    console.log(document.getElementById('search').value);
+//const addSearchData=()=>
+//{
+  //  console.log(document.getElementById('search').value);
    
 
-}
+//}
 
 

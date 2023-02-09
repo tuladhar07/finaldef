@@ -16,6 +16,7 @@ import About from "./About";
 import Profilepage from "./profile/ProfilePage";
 import UpdateBook from "./profile/UpdateBook";
 import HeaderTwoPage from "./headers/HeaderTwoPage";
+import SearchResultTwo from "./SearchTwo";
 
 import PrivateComponent from "./privatecomponent";
 import SearchResult from "./Search";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/profile" element={<Profilepage />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
         <Route path="/search" element={<SearchResult />}></Route>
+        <Route path="/searchtwo" element={<SearchResultTwo />}></Route>
         <Route path="/updatebook/:id" element={<UpdateBook />}></Route>
       </Routes>
 

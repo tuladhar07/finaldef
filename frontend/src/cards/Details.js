@@ -1,6 +1,7 @@
 import book4 from "../components/book4.jpg";
 import "./details.css";
 import Detailscard from "./Detailscard";
+import Mycard from "../cards/Mycard.js";
 import Detailscarouseltwo from "./Detailscarouseltwo";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -95,10 +96,22 @@ const Details = () => {
 
       <div className="line1"></div>
       <br />
-      <div className="Container1">
-        <h2 className="det_pri">Other uploads by Koshish</h2>
+      <div className="Container2">
+      <h2 className="det_pri">Other uploads </h2>
+        
         {searchSimilarBooks.map((similardetails, index) => (
-          <p> {similardetails.bookname} </p>
+          <>
+         
+          <p> <Detailscard
+          userId={similardetails.userId}
+            id={similardetails._id}
+            name={similardetails.bookname}
+            img={similardetails.image}
+            seller={similardetails.author}
+            price={similardetails.price}
+            s={similardetails.author}
+          /> </p>
+          </>
         ))}
         <br />
       </div>
