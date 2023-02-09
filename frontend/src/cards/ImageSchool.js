@@ -1,38 +1,58 @@
-import React from 'react'
-import Mycard from '../cards/Mycard.js'
-import books from '../components/books.png'
-import plustwo from '../components/+2.jpg'
-import entrance from '../components/Entrance.jpg'
-import school from '../components/School.jpg'
-import './Imagecarousel.css'
-import book1 from '../components/book1.jpg';
-import book2 from '../components/book2.jpg';
-import book3 from '../components/book3.jpg';
-import book4 from '../components/book4.jpg';
-import book5 from '../components/book5.jpg';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import Mycard from "../cards/Mycard.js";
+import books from "../components/books.png";
+import plustwo from "../components/+2.jpg";
+import entrance from "../components/Entrance.jpg";
+import school from "../components/School.jpg";
+import "./Imagecarousel.css";
+import book1 from "../components/book1.jpg";
+import book2 from "../components/book2.jpg";
+import book3 from "../components/book3.jpg";
+import book4 from "../components/book4.jpg";
+import book5 from "../components/book5.jpg";
+import axios from "axios";
+import "./Imagecarousel.css";
 
+const Imageschool = () => {
+  const [apiData, setApiData] = useState([]);
+  const location = useLocation();
+  const key = new URLSearchParams(location.search).get("key");
+  const { slug } = useParams();
 
-import './Imagecarousel.css'
-const Imagecarousel = () => {
+  useEffect(() => {
+    getData();
+  }, []);
 
-    return (
-        
+  const getData = async () => {
+    // const _id = localStorage.getItem("_id");
+    console.log(key);
+    let result = await fetch(`http://localhost:5000/category/${key}`);
+    result = await result.json();
+    console.log(result);
+    if (result) {
+      setApiData(result);
+    }
+    // setApiData(result.data).then((getData) => {
+    //   setApiData(getData.data);
+    // });
+  };
 
-        
-            <div className="product-container">
-           
-            
-            
-                <Mycard  name="Complete Mathematics" img={book5}  seller="Ram" price="Rs. 550" s="Uploaded By : Koshish Shrestha"  />
-                <Mycard  name="Old is Gold Solutions" img={book3} seller="Nhujaw" price="Rs. 600" s="Uploaded By : Koshish Shrestha"/>
-                <Mycard  name="SEE Science Guide" img={book1} seller="Koshish" price="Rs. 300" s="Uploaded By : Koshish Shrestha"/>
-                <Mycard  name="Nepali Book" img={entrance} seller="Kabita" price="Rs.1000" s="Uploaded By : Koshish Shrestha"/>
-                <Mycard  name="Guide on English" img={book2} seller="Krishna" price="Rs.2000" s="Uploaded By : Koshish Shrestha"/>
-                <Mycard  name="Optional Mathmatics" img={book4} seller="Mbappe" price="Rs. 150" s="Uploaded By : Koshish Shrestha"/>
-    
-        
-        </div>
-    )
-}
+  return (
+    <div className="product-container">
+      {apiData.map((book, index) => (
+        <Mycard
+          userId={book.userId}
+          id={book._id}
+          name={book.bookname}
+          img={book.image}
+          seller={book.author}
+          price={book.price}
+          s={book.author}
+        />
+      ))}
+    </div>
+  );
+};
 
-export default Imagecarousel
+export default Imageschool;

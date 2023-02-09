@@ -13,21 +13,31 @@ const Category = () => {
 
   const BachelorsCat = () => {
     navigate(`/bachelors?key=bachelors`);
-
-    // const BachelorsCat = () => {
-    //   navigate(`/bachelors?key=bachelors`);
-
-    //   const BachelorsCat = () => {
-    //     navigate(`/bachelors?key=bachelors`);
-
-    //     const BachelorsCat = () => {
-    //       navigate(`/bachelors?key=bachelors`);
-
-    // navigate({
-    //   pathname: "/bachelors",
-    //   search: `?key=bachelors`,
-    // });
   };
+  const PlusTwoCat = () => {
+    navigate(`/plustwoo?key=plustwo`);
+  };
+  const EntranceCat = () => {
+    navigate(`/entrance?key=entrance`);
+  };
+  const SchoolCat = () => {
+    navigate(`/school?key=school`);
+  };
+
+  // const BachelorsCat = () => {
+  //   navigate(`/bachelors?key=bachelors`);
+
+  //   const BachelorsCat = () => {
+  //     navigate(`/bachelors?key=bachelors`);
+
+  //     const BachelorsCat = () => {
+  //       navigate(`/bachelors?key=bachelors`);
+
+  // navigate({
+  //   pathname: "/bachelors",
+  //   search: `?key=bachelors`,
+  // });
+
   return (
     <div id="category">
       <h1 className="cat_name">Categories</h1>
@@ -35,10 +45,9 @@ const Category = () => {
         <div className="cat_one">
           <img className="cat_pic" src={clipart1} />
           <h1 className="cat_name">+2 Books</h1>
-          <Link to="/plustwoo">
-            {" "}
-            <button className="button_buyo">Buy Books</button>{" "}
-          </Link>
+          <button className="button_buyo" onClick={PlusTwoCat}>
+            Buy Books
+          </button>{" "}
         </div>
 
         <div className="cat_two">
@@ -52,16 +61,18 @@ const Category = () => {
         <div className="cat_three">
           <img className="cat_pic" src={clipart4} />
           <h1 className="cat_name">Entrance</h1>
-          <Link to="/entrance">
-            <button className="button_buyo">Buy Books</button>
-          </Link>
+
+          <button className="button_buyo" onClick={EntranceCat}>
+            Buy Books
+          </button>
         </div>
         <div className="cat_four">
           <img className="cat_pic" src={clipart3} />
           <h1 className="cat_name">School Books</h1>
-          <Link to="/school">
-            <button className="button_buyo">Buy Books</button>
-          </Link>
+
+          <button className="button_buyo" onClick={SchoolCat}>
+            Buy Books
+          </button>
         </div>
       </div>
     </div>
