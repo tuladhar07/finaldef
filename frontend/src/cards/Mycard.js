@@ -12,9 +12,9 @@ const Mycard = (props) => {
           <img className="card_img" src={props.img}></img>
           <div className="card_det">
             <h2 className="card_name"> {props.name}</h2>
-            <p className="seller_name">{props.seller}</p>
-            <p className="card_price">{props.price}</p>
-            <p className="s_name">{props.s}</p>
+            <p className="author_name">{props.author}</p>
+            <p className="card_price">Rs. {props.prices} </p>
+            <p className="s_name">Posted By : {props.s}</p>
           </div>{" "}
           <button
             className="card_btn"

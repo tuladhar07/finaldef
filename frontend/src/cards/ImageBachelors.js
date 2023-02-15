@@ -46,8 +46,8 @@ const Imagecarousel = () => {
           id={book._id}
           name={book.bookname}
           img={book.image}
-          seller={book.author}
-          price={book.price}
+          author={book.author}
+          prices={book.prices}
           s={book.author}
         />
       ))}

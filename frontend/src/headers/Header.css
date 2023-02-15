@@ -73,9 +73,9 @@
 
 .header_searchIcon
 {
-  padding: 13px;
-  width: 1.3em;
-  height: 1.3em;
+  padding: 17px 2px 0px 0px;
+  width: 1.5em;
+  height: 1.5em;
   float: right;
   color:black;
   cursor:pointer;
@@ -84,15 +84,15 @@
 }
 .header_searchIcon:hover
 {color:orange;
-    width: 1.3em;
-  height: 1.3em;
+    width: 1.5em;
+  height: 1.5em;
 
 }
 
 .header_personIcon
 {
   padding:13px;
-  height:10px;
+  height:12px;
   cursor:pointer;
   color:black;
   
@@ -121,6 +121,13 @@
 .searchIcon_main
 {
     display:flex;
+
+}
+
+.searchIcon_main>.searchText
+{
+    border:none;
+
 }
 .searchIcon_main:hover > .searchText
 {

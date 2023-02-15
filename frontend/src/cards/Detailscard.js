@@ -13,15 +13,15 @@ const Detailscard = (props) => {
           <h2 className="det_name"> {props.name}</h2>
           <p className="det_sell">By {props.seller}</p>
           <p className="det_price">{props.price}</p>
-          </div>{" "}
           <button
-            className="card_btn"
+            className="card_btn cardu "
             onClick={() =>
               navigate(`/details?key=${props.id}&userId=${props.userId}`)
             }
           >
             View Details
-          </button>{" "}
+          </button>
+          </div>{" "}
         </div>
       </div>
     

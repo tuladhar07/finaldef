@@ -36,13 +36,13 @@
 
 .card_img
 {
-    height: 100%;
-    width: 100%;
+    height: 150px;
+    width: 100px;
     
-    margin-top: 25px;
-    
+    margin-top: 15px;
+  
 
-    margin-left: 30px;
+    margin-left: 25px;
     
 }
 
@@ -103,7 +103,7 @@
     
 }
 
-.seller_name
+.author_name
 {   margin-top:0px;
     margin-block-end: 0em;
     color:rgb(196, 196, 196);
@@ -115,4 +115,8 @@
     font-size: 13px;
     margin-block-end: 0em;
     
+}
+.cardu{
+    margin:-10% ;
+    margin-left: 35% ;
 }
