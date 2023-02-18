@@ -32,6 +32,7 @@ const SignInPage = () => {
               localStorage.setItem('_id', result.user[0]._id);
               
               localStorage.setItem('email', result.user[0].email)
+              localStorage.setItem('username', result.user[0].username);
               localStorage.setItem("token", JSON.stringify(result.auth));
               navigate('/profile')
         }else{

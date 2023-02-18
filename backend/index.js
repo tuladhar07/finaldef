@@ -159,7 +159,7 @@ app.post("/login", async (req, resp) => {
   if (!user1[0].verified) {
     resp.send({ result: "USER NOT VERIFIED YET " });
   }
-  let user = await User.find({ username }).select("password").select("email");
+  let user = await User.find({ username }).select("password").select("email").select("username");
   console.log(user);
   let checkValid = await bcrypt.compare(password, user[0].password);
   console.log(checkValid);
@@ -489,7 +489,7 @@ app.get("/review/:id", async (req, resp) => {
 
 app.listen(5000);
 
-const Pusher = require("pusher");
+
 
 // const pusher = new Pusher({
 //   appId: "1553800",

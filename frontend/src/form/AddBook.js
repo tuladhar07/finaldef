@@ -4,7 +4,7 @@ import HeaderTwo from "../headers//HeaderTwo";
 import Footer from "../Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
+
 function AddBook() {
   const [selectedFile, setSelectedFile] = useState("");
   const [image, setImage] = useState("");

@@ -7,9 +7,10 @@ const productSchema = new mongoose.Schema({
     publicationyr:String,
     category:String,
     userId:String,
-    location: String,
+    // latitude:Number,
+    // longitude:Number,
     image: String,
-    prices: String,
+    prices: Number,
 
 
 });

@@ -5,5 +5,6 @@ const reviewSchema = new mongoose.Schema({
   bookId: String,
   userId: String,
   loggedinId: String,
+  username:String,
 });
 module.exports = mongoose.model("review", reviewSchema);

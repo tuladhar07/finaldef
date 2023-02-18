@@ -18,7 +18,6 @@ import UpdateBook from "./profile/UpdateBook";
 import HeaderTwoPage from "./headers/HeaderTwoPage";
 import SearchResultTwo from "./SearchTwo";
 import ChatBox from "./chatbox";
-import Mapp from "./leaflet/markers";
 
 import PrivateComponent from "./privatecomponent";
 import SearchResult from "./Search";
@@ -54,7 +53,7 @@ function App() {
         <Route path="/searchtwo" element={<SearchResultTwo />}></Route>
         <Route path="/updatebook/:id" element={<UpdateBook />}></Route>
         <Route path="/chatbox" element={<ChatBox />}></Route>
-        <Route path="/map" element={<Mapp />}></Route>
+        
       </Routes>
 
       <Footer />

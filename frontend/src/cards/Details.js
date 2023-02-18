@@ -15,7 +15,7 @@ const Details = () => {
   const key = new URLSearchParams(location.search).get("key");
   const userId = new URLSearchParams(location.search).get("userId");
   const loggedinId = new URLSearchParams(location.search).get("loggedinId");
-
+  const username=localStorage.getItem("username");
   const [searchResults, setSearchResults] = useState([]);
   const [searchUsers, setUserResults] = useState([]);
   const [searchSimilarBooks, setSimilarBooks] = useState([]);
@@ -24,6 +24,7 @@ const Details = () => {
     details: "",
     userId: userId,
     bookId: key,
+    username: username,
   });
   const [getReviews, setGetReviews] = useState([]);
   const [getRevDetails, setGetRevDetails] = useState([]);
@@ -34,17 +35,10 @@ const Details = () => {
     searchUploader();
     SimilarBooks();
     reviewData();
-    getReviewUser();
+    
   }, []);
 
-  const getReviewUser = async () => {
-    let result = await fetch(`http://localhost:5000/userdetails/${loggedinId}`);
-
-    result = await result.json();
-    console.log("getreviewuser");
-    console.log(result);
-    setGetRevDetails(result);
-  };
+ 
 
   const updateReview = async (e) => {
     setReviews({ ...searchReviews, [e.target.name]: e.target.value });
@@ -128,10 +122,10 @@ const Details = () => {
             {getReviews.map((rev, index) => (
               <>
                 <p>{rev.details}</p>
-                <p> {rev.loggedinId}</p>
-                {getRevDetails.map((revdetails, index) => (
-                  <p> Posted By: {revdetails.username}</p>
-                ))}
+                <p> Posted By: {rev.username}</p>
+                
+                
+                
               </>
             ))}
           </ul>
