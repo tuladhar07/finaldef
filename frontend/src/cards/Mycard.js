@@ -4,6 +4,7 @@ import "./Mycard.css";
 import { Link } from "react-router-dom";
 const Mycard = (props) => {
   const navigate = useNavigate();
+  const _id = localStorage.getItem("_id");
 
   return (
     <div>
@@ -19,7 +20,9 @@ const Mycard = (props) => {
           <button
             className="card_btn"
             onClick={() =>
-              navigate(`/details?key=${props.id}&userId=${props.userId}`)
+              navigate(
+                `/details?key=${props.id}&userId=${props.userId}&loggedinId=${_id}`
+              )
             }
           >
             View Details

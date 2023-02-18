@@ -33,8 +33,9 @@ const ProfilePagecarousel = () => {
           {apiData.map((profilebook, index) => (
             <Profilecard
             id={profilebook._id}
+            img={profilebook.image}
               name={profilebook.bookname}
-              price={profilebook.price}
+              price={profilebook.prices}
               author={profilebook.author}
             />
           ))}

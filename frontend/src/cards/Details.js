@@ -6,40 +6,59 @@ import Mycard from "../cards/Mycard.js";
 import Detailscarouseltwo from "./Detailscarouseltwo";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
+import axios from "axios";
 
 const Details = () => {
+  const location = useLocation();
+
+  const { slug } = useParams();
+  const key = new URLSearchParams(location.search).get("key");
+  const userId = new URLSearchParams(location.search).get("userId");
+  const loggedinId = new URLSearchParams(location.search).get("loggedinId");
+
   const [searchResults, setSearchResults] = useState([]);
   const [searchUsers, setUserResults] = useState([]);
   const [searchSimilarBooks, setSimilarBooks] = useState([]);
+  const [searchReviews, setReviews] = useState({
+    loggedinId: loggedinId,
+    details: "",
+    userId: userId,
+    bookId: key,
+  });
+  const [getReviews, setGetReviews] = useState([]);
   const [error, setError] = useState(false);
-  const location = useLocation();
-  const key = new URLSearchParams(location.search).get("key");
-  const userId = new URLSearchParams(location.search).get("userId");
-  console.log(userId);
-  const { slug } = useParams();
+
   useEffect(() => {
     searchProduct();
     searchUploader();
     SimilarBooks();
+    reviewData();
   }, []);
 
-  // const placestolatong = () => {
-  //   //map integration
-  //   let geocoder = new google.maps.Geocoder();
-  //   let address = "new york";
+  const updateReview = async (e) => {
+    setReviews({ ...searchReviews, [e.target.name]: e.target.value });
+  };
+  const reviewData = async (e) => {
+    let result = await fetch(`http://localhost:5000/review/${key}`);
+    result = await result.json();
+    console.log(result);
+    setGetReviews(result);
+  };
 
-  //   geocoder.geocode({ 'address': address }, function (results, status) {
-  //     if (status == google.maps.GeocoderStatus.OK) {
-  //       console.log("results value here:");
-  //       console.log(results);
-  //       const latitude = results[0].geometry.location.lat();
-  //       const longitude = results[0].geometry.location.lng();
-  //       console.log(latitude, longitude);
-  //     }
-  //   });
-  // };
+  const sendReview = async (e) => {
+    e.preventDefault();
+    console.log(searchReviews);
+    const result = await fetch("http://localhost:5000/review", {
+      method: "POST",
+      body: JSON.stringify(searchReviews),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await result.json();
+    console.log(data);
+  };
   const searchProduct = async () => {
-    console.log(key);
     let result = await fetch(`http://localhost:5000/bookdetails/${key}`);
     result = await result.json();
     if (result) {
@@ -47,7 +66,6 @@ const Details = () => {
     }
   };
   const searchUploader = async () => {
-    console.log(userId);
     let result = await fetch(`http://localhost:5000/userdetails/${userId}`);
     result = await result.json();
     if (result) {
@@ -55,7 +73,6 @@ const Details = () => {
     }
   };
   const SimilarBooks = async () => {
-    console.log(userId);
     let result = await fetch(`http://localhost:5000/products/${userId}`);
     result = await result.json();
     if (result) {
@@ -66,7 +83,10 @@ const Details = () => {
   return (
     <div>
       <div className="selected-book">
-        <img className="details_img" src={book4} />
+        {searchResults.map((bookimg, index) => (
+          <img className="details_img" src={bookimg.image} />
+        ))}
+
         <div className="book_info">
           {searchResults.map((bookdetails, index) => (
             <>
@@ -83,7 +103,7 @@ const Details = () => {
                 <br />
                 <div className="location">Location: Kalimati, Kathmandu</div>
               </div>
-              <h1 className="det_pri">Price: Rs. 900</h1>
+              <h1 className="det_pri">Price:{bookdetails.prices}</h1>
             </>
           ))}
         </div>
@@ -91,15 +111,19 @@ const Details = () => {
         <div className="container">
           <h2>Reviews:</h2>
           <ul>
-            <p>DAMI DAMI DAMI</p>
+            {getReviews.map((rev, index) => (
+              <p>{rev.details}</p>
+            ))}
           </ul>
           <hr />
           <input
-            id="review"
-            type="review"
+            id="details"
+            type="details"
+            name="details"
             placeholder="Add your review"
+            onChange={updateReview}
           ></input>
-          <button type="button" className="det_btn">
+          <button type="button" className="det_btn" onClick={sendReview}>
             Add Review
           </button>
         </div>

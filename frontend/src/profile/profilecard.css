@@ -21,9 +21,11 @@
 .profcard_img
 {
     height: 200px;
-    border-radius: 30px;
+    
+    width: 200px;
+  
     margin-top: 25px;
-    margin-left: 30px;
+    margin-left: 15px;
 }
 
 .profcard_body
@@ -41,6 +43,7 @@
 {
     text-align: left;
     margin-top: 40px;
+    margin-left:10px;
    
 }
 
@@ -55,7 +58,7 @@
     color:white;
     font-size: 20px;
     margin-left: 150px;
-    margin-top: 100px;
+    margin-top: 80px;
     cursor: pointer;
 }
 
@@ -86,3 +89,22 @@
     margin-block-start: 0em;
 }
 
+.delete_btn
+{
+    height: 50px;
+    width: 150px;
+    background-color: red;
+    border-width: 0px;
+    color:white;
+    font-size:20px;
+    margin-top: 10px;
+    margin-left:150px;
+    border-radius:30px;
+   
+}
+
+.delete_btn:hover
+{
+    background-color: black;
+   
+}

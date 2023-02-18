@@ -13,7 +13,7 @@
    
     grid-gap: 0.5rem;
    
-     grid-template-rows: 0.5fr 4fr 10fr; 
+     grid-template-rows: 0.5fr 0fr 10fr; 
     grid-template-columns: 1.2fr 3fr 1.2fr;
    
     grid-template-areas:
@@ -35,6 +35,7 @@
     font-family: 'Poppins';
     padding: 15px;
     margin-bottom: 30px;
+    height:500px;
    
   
 }
@@ -67,8 +68,8 @@
     text-align: left;
     padding: 15px;
     padding-left: 30px;
-    
     font-family: 'Poppins';
+    height:30px;
 }
 
 .addbook_profile{
@@ -130,4 +131,60 @@
 .prof_det
 {
     text-align: left;
+}
+
+.btn-cover
+{
+    
+    align-items: center;
+    column-gap: 10px;
+}
+
+.suredelete-container
+{
+    border:1px solid grey;
+    width: 500px;
+    margin-left: 500px;
+    background-color: white;
+    height:200px;
+}
+
+.yes-btn
+{
+    margin-right:50px;
+    height:40px;
+    width:100px;
+    font-size: 20px;
+    background-color: red;
+    border:none;
+    border-radius:15px;
+    color:white;
+
+}
+.yes-btn:hover
+{
+    background-color: black;
+    cursor:pointer;
+
+}
+
+.no-btn
+{
+  
+
+    margin-left:50px;
+    height:40px;
+    width:100px;
+    font-size: 20px;
+    background-color: green;
+    border:none;
+    border-radius:15px;
+    color:white;
+
+}
+.no-btn:hover
+{
+    background-color: black;
+    cursor:pointer;
+
 }

@@ -138,6 +138,31 @@ height:30px;
 
 }
 
+.dropDown ul li
+{
+    list-style-type: none;
+    text-decoration: none;
+    
+
+}
+
+
+/* .dropDown:before{
+content:'';
+position:absolute;
+top:-0.7rem;
+right:1.1rem;
+width:20px;
+height:20px;
+transform:rotate(45deg);
+background-color: white;
+border-left:1px solid grey;
+border-top:1px solid grey;
+
+
+
+} */
+
 
 
 @media screen and (max-width:900px){
