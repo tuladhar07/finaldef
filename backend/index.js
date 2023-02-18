@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const User = require("./Users.js");
 const Product = require("./Product.js");
+const Review = require("./Review.js");
 const Jwt = require("jsonwebtoken");
 const jwtKey = "pustak";
 const app = express();
@@ -398,10 +399,6 @@ app.get("/products/:userId", async (req, resp) => {
   }
 });
 
-
-
-
-
 //delete product
 app.delete("/product/:id", async (req, resp) => {
   const result = await Product.deleteOne({ _id: req.params.id });
@@ -427,20 +424,18 @@ app.get("/search/:key", async (req, resp) => {
   let result = await Product.find({
     $or: [{ bookname: { $regex: req.params.key.trim(), $options: "i" } }],
   });
- 
+
   resp.send(result);
 });
 
-
 //category search
 app.get("/category/:key", async (req, resp) => {
-  console.log(req.body)
-  console.log(resp.body)
+  console.log(req.body);
+  console.log(resp.body);
   let result = await Product.find({
-    
     $or: [{ category: { $regex: req.params.key.trim(), $options: "i" } }],
   });
-  
+
   resp.send(result);
 });
 
@@ -474,4 +469,35 @@ app.put("/uproduct/:id", async (req, resp) => {
   resp.send(result);
 });
 
+app.post("/review", async (req, resp) => {
+  console.log(req.body);
+  let review = new Review(req.body);
+  let result = await review.save();
+  resp.send(result);
+});
+
+app.get("/review/:id", async (req, resp) => {
+  console.log(resp.body);
+  let result = await Review.find({ bookId: req.params.id });
+  if (result) {
+    resp.send(result);
+  } else {
+    resp.send({ result: "No Record Found." });
+  }
+});
+
 app.listen(5000);
+
+const Pusher = require("pusher");
+
+// const pusher = new Pusher({
+//   appId: "1553800",
+//   key: "7301c04b6d68b65ccc23",
+//   secret: "4d7abe3c6ae643d36dfd",
+//   cluster: "ap2",
+//   useTLS: true
+// });
+
+// pusher.trigger("my-channel", "my-event", {
+//   message: "hello world"
+// });
