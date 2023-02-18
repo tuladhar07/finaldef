@@ -26,6 +26,7 @@ const Details = () => {
     bookId: key,
   });
   const [getReviews, setGetReviews] = useState([]);
+  const [getRevDetails, setGetRevDetails] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -33,7 +34,17 @@ const Details = () => {
     searchUploader();
     SimilarBooks();
     reviewData();
+    getReviewUser();
   }, []);
+
+  const getReviewUser = async () => {
+    let result = await fetch(`http://localhost:5000/userdetails/${loggedinId}`);
+
+    result = await result.json();
+    console.log("getreviewuser");
+    console.log(result);
+    setGetRevDetails(result);
+  };
 
   const updateReview = async (e) => {
     setReviews({ ...searchReviews, [e.target.name]: e.target.value });
@@ -42,6 +53,9 @@ const Details = () => {
     let result = await fetch(`http://localhost:5000/review/${key}`);
     result = await result.json();
     console.log(result);
+    console.log("masale Koshish");
+    console.log(result.details);
+
     setGetReviews(result);
   };
 
@@ -112,7 +126,13 @@ const Details = () => {
           <h2>Reviews:</h2>
           <ul>
             {getReviews.map((rev, index) => (
-              <p>{rev.details}</p>
+              <>
+                <p>{rev.details}</p>
+                <p> {rev.loggedinId}</p>
+                {getRevDetails.map((revdetails, index) => (
+                  <p> Posted By: {revdetails.username}</p>
+                ))}
+              </>
             ))}
           </ul>
           <hr />
