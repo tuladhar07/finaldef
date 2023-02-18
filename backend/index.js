@@ -11,6 +11,7 @@ const jwtKey = "pustak";
 const app = express();
 const multiparty = require("multiparty");
 const IMAGE_UPLOAD_DIR = "./uploads";
+const IMAGE_UPLOAD_DIR1 = "./profileimg";
 const IMAGE_BASE_URL = "http://localhost:5000/";
 const { createBrotliCompress } = require("zlib");
 const nodemailer = require("nodemailer");
