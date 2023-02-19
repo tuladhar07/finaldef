@@ -4,7 +4,7 @@ import axios from "axios";
 import "./search.css";
 import Mycard from "./cards/Mycard";
 
-const SearchResult = () => {
+const SearchHeaderResult = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(false);
   const location = useLocation();
@@ -85,4 +85,4 @@ const SearchResult = () => {
     </div>
   );
 };
-export default SearchResult;
+export default SearchHeaderResult;

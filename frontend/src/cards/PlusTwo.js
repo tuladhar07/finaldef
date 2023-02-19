@@ -1,8 +1,60 @@
-import React from "react";
-import Imagecarousel from "./ImagePlusTwo";
 import "./plustwo.css";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import Mycard from "../cards/Mycard.js";
+import "./Imagecarousel.css";
 
-const BuyingPage = () => {
+const PlusTwo = () => {
+  const [apiData, setApiData] = useState([]);
+  const location = useLocation();
+  const key = new URLSearchParams(location.search).get("key");
+  const { slug } = useParams();
+
+  const getData = async () => {
+    // const _id = localStorage.getItem("_id");
+    console.log(key);
+    let result = await fetch(`http://localhost:5000/category/${key}`);
+    result = await result.json();
+    console.log(result);
+    if (result) {
+      setApiData(result);
+    }
+    // setApiData(result.data).then((getData) => {
+    //   setApiData(getData.data);
+    // });
+  };
+
+  const SortingLowest = () => {
+    console.log("Hahahaha");
+    const numAscending = [...apiData].sort((a, b) => a.prices - b.prices);
+    console.log(numAscending);
+    setApiData(numAscending);
+  };
+
+  const SortingHighest = () => {
+    const numDescending = [...apiData].sort((a, b) => b.prices - a.prices);
+    console.log(numDescending);
+    setApiData(numDescending);
+  };
+
+  const SortingAtoZ = () => {
+    const strAscending = [...apiData].sort((a, b) =>
+      a.bookname > b.bookname ? 1 : -1
+    );
+    setApiData(strAscending);
+  };
+
+  const SortingZtoA = () => {
+    const strDescending = [...apiData].sort((a, b) =>
+      a.bookname > b.bookname ? -1 : 1
+    );
+    setApiData(strDescending);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div>
       <div className="cat_main_title">
@@ -23,20 +75,36 @@ const BuyingPage = () => {
               <a href="/entrance?key=entrance">Entrance</a>
             </li>
             <li>
-              <a href="/school?key=entrance">School Books</a>
+              <a href="/school?key=school">School Books</a>
             </li>
           </ul>
         </div>
         <div className="booklist_wrapper">
-          <Imagecarousel />
+          <div className="product-container">
+            {apiData.map((book, index) => (
+              <Mycard
+                userId={book.userId}
+                id={book._id}
+                name={book.bookname}
+                img={book.image}
+                author={book.author}
+                prices={book.prices}
+                s={book.author}
+              />
+            ))}
+          </div>
         </div>
         <div className="cat_o">
           <p className="para_o">Filters</p>
           <hr />
+          <button onClick={SortingLowest}>Price (Lowest)</button>
+          <button onClick={SortingHighest}>Price (Highest)</button>
+          <button onClick={SortingAtoZ}>Alphabet (A-Z)</button>
+          <button onClick={SortingZtoA}>Alphabet (Z-A)</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default BuyingPage;
+export default PlusTwo;

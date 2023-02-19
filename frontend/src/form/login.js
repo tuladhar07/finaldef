@@ -1,78 +1,87 @@
-import React ,{ useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import HeaderTwo from '../headers//HeaderTwo'
-import Footer from '../Footer'
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import HeaderTwo from "../headers//HeaderTwo";
+import Footer from "../Footer";
 //import bycrpt from 'bcrypt.js'
-import './login.css'
+import "./login.css";
 const SignInPage = () => {
-    const navigate=useNavigate();
-    const [values, setValues] = useState({
-        username: "",
-        password: "",
-        verify:""
-      });
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+    verify: "",
+  });
 
-    
-      const handleLogin = async (e) => {
-        e.preventDefault();
-    
-        console.log(values);
-      
-        let result=await fetch ('http://localhost:5000/login', {
-            method:'post',
-            body:JSON.stringify(values),
-            headers:{
-                'Content-Type':'application/json'
-            }
-        });
-        result=await result.json();
-        console.warn (result)
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-          if (result.auth) {
-              localStorage.setItem('_id', result.user[0]._id);
-              
-              localStorage.setItem('email', result.user[0].email)
-              localStorage.setItem('username', result.user[0].username);
-              localStorage.setItem("token", JSON.stringify(result.auth));
-              navigate('/profile')
-        }else{
-            alert("pleease enter correct details")} 
-         
-      }
+    console.log(values);
 
-      const onChange = (e) => {
-        setValues({ ...values, [e.target.name]: e.target.value });
-      };
+    let result = await fetch("http://localhost:5000/login", {
+      method: "post",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    console.warn(result);
 
-    return (
-        <>
+    if (result.auth) {
+      localStorage.setItem("_id", result.user[0]._id);
 
-        <div className="text-center m-5-auto">
-            <h2 className="signin_tit">Sign in</h2>
-            <form className="login_f" onSubmit={handleLogin}>
-                <p>
-                    <label>Username or email address</label><br/>
-                    <input type="text" name="username" required  onChange={onChange}/>
-                </p>
-                <p>
-                    <label >Password</label>
-                    <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
-                    <br/>
-                    <input type="password" name="password" required onChange={onChange}/>
-                </p>
+      localStorage.setItem("email", result.user[0].email);
+      localStorage.setItem("username", result.user[0].username);
+      localStorage.setItem("token", JSON.stringify(result.auth));
+      navigate("/");
+    } else {
+      alert("pleease enter correct details");
+    }
+  };
 
-            <button id="sub_btn" type="submit" className="btn_login">Login</button> 
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
-            </form>
-            <footer>
-                <p>Don't have account ?  <Link to="/signup">Create an account</Link>.</p>
-                <p><Link to="/">Back to Homepage</Link>.</p>
-            </footer>
-        </div>
+  return (
+    <>
+      <div className="text-center m-5-auto">
+        <h2 className="signin_tit">Sign in</h2>
+        <form className="login_f" onSubmit={handleLogin}>
+          <p>
+            <label>Username or email address</label>
+            <br />
+            <input type="text" name="username" required onChange={onChange} />
+          </p>
+          <p>
+            <label>Password</label>
+            <Link to="/forget-password">
+              <label className="right-label">Forget password?</label>
+            </Link>
+            <br />
+            <input
+              type="password"
+              name="password"
+              required
+              onChange={onChange}
+            />
+          </p>
 
-        </>
-    )
-
-}
+          <button id="sub_btn" type="submit" className="btn_login">
+            Login
+          </button>
+        </form>
+        <footer>
+          <p>
+            Don't have account ? <Link to="/signup">Create an account</Link>.
+          </p>
+          <p>
+            <Link to="/">Back to Homepage</Link>.
+          </p>
+        </footer>
+      </div>
+    </>
+  );
+};
 
 export default SignInPage;

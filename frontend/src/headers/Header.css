@@ -188,3 +188,26 @@ border-top:1px solid grey;
 }
 
 }
+
+.header_profilename
+{   text-decoration: none;
+    color: black;
+    font-size: 25px;
+   border-radius: 20px;
+    text-align: center;
+    padding:10px 30px;
+
+    cursor: pointer;
+
+}
+
+.header_logout
+{   text-decoration: none;
+    color: red;
+    
+   border-radius: 30px;
+    text-align: center;
+ 
+    cursor: pointer;
+
+}

@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../components/logo.png";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Link as Link1 } from "react-scroll";
 import { Link as Link2, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const auth = localStorage.getItem("_id");
+  const userName = localStorage.getItem("username");
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
     navigate("/signup");
+  };
+
+  const addSearchData = (e) => {
+    navigate(`/search?key=${search}`);
+    window.location.reload(true);
   };
 
   return (
@@ -65,25 +73,30 @@ const Header = () => {
             type="text"
             className="searchText"
             placeholder="    Type to search.."
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
           ></input>
 
           <SearchIcon className="header_searchIcon" onClick={addSearchData} />
         </div>
+       
         {auth ? (
-          <Link2 onClick={logout} to="/login">
+          <Link2 to="/profile" className="header_profilename">{userName}</Link2>
+        ) : (
+          <Link2 to="/profile"> </Link2>
+        )}
+
+        {auth ? (
+          <Link2 onClick={logout} to="/login" className="header_logout">
             {" "}
-            Logout{" "}
+            <LogoutIcon/>{" "}
           </Link2>
         ) : (
           <Link2 to="/login">
             {" "}
             <PersonIcon className="header_personIcon" />{" "}
           </Link2>
-        )}
-        {auth ? (
-          <Link2 to="/profile"> profile</Link2>
-        ) : (
-          <Link2 to="/profile"> </Link2>
         )}
       </div>
     </div>

@@ -16,8 +16,8 @@ import About from "./About";
 import Profilepage from "./profile/ProfilePage";
 import UpdateBook from "./profile/UpdateBook";
 import HeaderTwoPage from "./headers/HeaderTwoPage";
-import SearchResultTwo from "./SearchTwo";
-import ChatBox from "./chatbox";
+import SearchHeader from "./SearchHeader";
+import PriceFilter from "./cards/pricefilter";
 
 import PrivateComponent from "./privatecomponent";
 import SearchResult from "./Search";
@@ -50,10 +50,9 @@ function App() {
         <Route path="/profile" element={<Profilepage />}></Route>
         <Route path="/otp" element={<OTP />}></Route>
         <Route path="/search" element={<SearchResult />}></Route>
-        <Route path="/searchtwo" element={<SearchResultTwo />}></Route>
+        <Route path="/searchheader" element={<SearchHeader />}></Route>
         <Route path="/updatebook/:id" element={<UpdateBook />}></Route>
-        <Route path="/chatbox" element={<ChatBox />}></Route>
-        
+        <Route path="/pricefilter" element={<PriceFilter />}></Route>
       </Routes>
 
       <Footer />

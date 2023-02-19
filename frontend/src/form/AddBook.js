@@ -4,6 +4,9 @@ import HeaderTwo from "../headers//HeaderTwo";
 import Footer from "../Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {Search,GpsFixed} from '@material-ui/icons'
+import AutoComplete from "../Googlemap/AutoComplete";
+import AddLocation from "../Googlemap/AddLocation";
 
 function AddBook() {
   const [selectedFile, setSelectedFile] = useState("");
@@ -82,12 +85,15 @@ function AddBook() {
           </div>
           <div>
             <label>Condition</label>
-            <input
-              type="text"
-              name="condition"
-              value={condition}
-              onChange={(e) => setCondition(e.target.value)}
-            />
+            <select className="select-options" 
+            value={condition}
+            onChange={(e) => setCategory(e.target.value)}
+          > <option value="" disabled selected hidden>Select Condition</option>
+            <option value="+2">Brand New</option>
+            <option value="New">New</option>
+            <option value="Used">Used</option>
+            <option value="Old">Old</option>
+          </select>
           </div>
           <div>
             <label>Publication Year</label>
@@ -110,12 +116,14 @@ function AddBook() {
             />
             <div>
               <label>Location</label>
-              <input
-                type="text"
-                name="location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
+            {/* <input
+            //   type="text"
+            //   name="location"
+            //   value={location}
+            //   onChange={(e) => setLocation(e.target.value)}
+  // /> */}
+  <AddLocation/>
+          
               
             </div>
           </div>
@@ -125,9 +133,10 @@ function AddBook() {
               {""}
             </label>
             <select
+            className="select-options"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            >
+            > <option value="" disabled selected hidden>Select Category</option>
               <option value="+2">+2 Books</option>
               <option value="bachelors">Bachelors</option>
               <option value="entrance">Entrance</option>
