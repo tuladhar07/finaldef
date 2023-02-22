@@ -72,6 +72,7 @@ const SearchResult = () => {
                 author={searchResults.author}
                 price={searchResults.prices}
                 s={searchResults.username}
+                id={searchResults._id}
               />
             </>
           ))}

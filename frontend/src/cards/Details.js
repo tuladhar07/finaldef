@@ -25,6 +25,7 @@ const Details = () => {
   const goToUserProfile = (e) => {
     navigate(`/profilepagetwo?user=${userId}`);
   };
+  const auth = localStorage.getItem("_id");
 
   const [searchReviews, setReviews] = useState({
     loggedinId: loggedinId,
@@ -164,9 +165,20 @@ const Details = () => {
             placeholder="Add your review"
             onChange={updateReview}
           ></input>
-          <button type="button" className="det_btn" onClick={sendReview}>
+          
+          {auth ? (
+            
+            <button type="button" className="det_btn" onClick={sendReview}>
             Add Review
           </button>
+            
+          ) : (
+            <Link to="/login">
+              <button className="button_sell">Add Review</button>{" "}
+            </Link>
+          )}
+          
+        
         </div>
         <div className="uploader">
           {searchUsers.map((userdetails, index) => (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AddBook.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -17,9 +18,9 @@ function AddBook() {
   const userId = localStorage.getItem("_id");
   const username = localStorage.getItem("username");
 
- 
   const handleApi = async (e) => {
     e.preventDefault();
+    navigate(`/success`);
     const formData = new FormData();
 
     formData.append("image", selectedFile);
@@ -57,6 +58,7 @@ function AddBook() {
     console.log(e.target.files);
     setSelectedFile(e.target.files[0]);
   };
+  const navigate = useNavigate();
 
   return (
     <>
@@ -151,15 +153,9 @@ function AddBook() {
           <div className="image">
             <input type="file" name="file" onChange={handleImageChange} />
 
-     <Link to = "/success" >     <button
-              type="submit"
-              className="uploadbtn"
-              onChange={handleApi}
-      
-            >
+            <button type="submit" className="uploadbtn" onChange={handleApi}>
               Upload!
             </button>
-            </Link> 
           </div>
         </form>
       </div>
