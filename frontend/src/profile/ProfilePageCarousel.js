@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Profilecard from "./Profilecard.js";
 import axios from "axios";
 const ProfilePagecarousel = () => {
+  window.scrollTo(0, 0);
   {
     const [apiData, setApiData] = useState([]);
     useEffect(() => {

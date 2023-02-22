@@ -7,6 +7,7 @@ import ProfilePageCarousel from "./ProfilePageCarousel";
 import { Link } from "react-router-dom";
 
 const Details = (props) => {
+  window.scrollTo(0, 0);
   return (
     <>
       <div className="prof_det">

@@ -8,6 +8,7 @@ import { ContactsOutlined } from "@material-ui/icons";
 import ProfilecardUploader from "./profilecardUploader.js";
 
 const Details = (props) => {
+  window.scrollTo(0, 0);
   return (
     <>
       <div className="prof_det">

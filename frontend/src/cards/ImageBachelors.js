@@ -6,6 +6,7 @@ import axios from "axios";
 import "./Imagecarousel.css";
 
 const Imagecarousel = () => {
+  window.scrollTo(0, 0);
   const [apiData, setApiData] = useState([]);
   const location = useLocation();
   const key = new URLSearchParams(location.search).get("key");

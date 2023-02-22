@@ -9,6 +9,7 @@ import clipart4 from "./components/clipart4.jpg";
 import clipart5 from "./components/clipart5.jpg";
 
 const Category = () => {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
 
   const BachelorsCat = () => {

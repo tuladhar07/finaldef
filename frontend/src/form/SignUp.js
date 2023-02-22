@@ -4,6 +4,7 @@ import FormInput from "../form/FormInput.js";
 
 import { useNavigate } from "react-router-dom";
 const SignUp = () => {
+  window.scrollTo(0, 0);
   const [values, setValues] = useState({
     username: "",
     email: "",

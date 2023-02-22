@@ -5,6 +5,7 @@ import "./search.css";
 import Mycard from "./cards/Mycard";
 
 const SearchHeaderResult = () => {
+  window.scrollTo(0, 0);
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(false);
   const location = useLocation();

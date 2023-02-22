@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 function UpdateBook() {
+  window.scrollTo(0, 0);
   const [selectedFile, setSelectedFile] = useState("");
   const [image, setImage] = useState("");
   const [bookname, setBookName] = useState("");

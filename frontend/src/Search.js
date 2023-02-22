@@ -6,6 +6,7 @@ import Mycard from "./cards/Mycard";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 const SearchResult = () => {
+  window.scrollTo(0, 0);
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(false);
   const location = useLocation();

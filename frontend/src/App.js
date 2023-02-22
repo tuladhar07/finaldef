@@ -31,6 +31,7 @@ import {
 import { Update } from "@mui/icons-material";
 
 function App() {
+  window.scrollTo(0, 0);
   return (
     <div className="App">
       <Header />

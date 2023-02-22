@@ -3,6 +3,7 @@ import "./detailscard.css";
 import Details from "./Details";
 import { Link, useNavigate } from "react-router-dom";
 const Detailscard = (props) => {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
 
   const onClickHandler = () => {

@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Uploaderprofile from "./UploaderProfile";
 
 const ProfilecardUploader = (props) => {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
 
   const onClickHandlerr = () => {

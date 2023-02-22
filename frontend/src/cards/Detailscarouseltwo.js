@@ -11,6 +11,7 @@ import book4 from '../components/book4.jpg'
 import "./Detailscarousel.css"
 
 const Detailscarouseltwo = () => {
+    window.scrollTo(0, 0);
 
     return (
         

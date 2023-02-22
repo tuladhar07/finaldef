@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 //import bycrpt from 'bcrypt.js'
 import "./login.css";
 const SignInPage = () => {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",

@@ -5,6 +5,7 @@ import Mycard from "../cards/Mycard.js";
 import "./Imagecarousel.css";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 const PlusTwo = () => {
+  window.scrollTo(0, 0);
   const [apiData, setApiData] = useState([]);
   const location = useLocation();
   const key = new URLSearchParams(location.search).get("key");

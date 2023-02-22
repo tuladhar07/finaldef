@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useRef } from "react";
 
 const Profilecard = (props) => {
+  window.scrollTo(0, 0);
   const overlayRef = useRef();
 
   const openDelete = () => {

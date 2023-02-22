@@ -10,6 +10,7 @@ import axios from "axios";
 import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRight";
 
 const Details = () => {
+  window.scrollTo(0, 0);
   const location = useLocation();
 
   const { slug } = useParams();

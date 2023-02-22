@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./formInput.css";
 
 const FormInput = (props) => {
+  window.scrollTo(0, 0);
   const [focused, setFocused] = useState(false);
   const { label, errorMessage, onChange, id, ...inputProps } = props;
 

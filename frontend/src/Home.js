@@ -12,6 +12,7 @@ import { useRef } from "react";
 import "./fullscreensearch.css";
 
 function Home() {
+  window.scrollTo(0, 0);
   // This ref will be connected to the overlay div
   const overlayRef = useRef();
   const auth = localStorage.getItem("_id");

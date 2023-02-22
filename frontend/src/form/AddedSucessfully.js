@@ -4,6 +4,7 @@ import greenTick from "../components/greentick.png";
 import pencilCheck from "../components/pencil-check.gif";
 import { Link } from "react-router-dom";
 function AddedSucessfully() {
+    window.scrollTo(0, 0);
   return (
     <div>
       <div className="tick_photo">

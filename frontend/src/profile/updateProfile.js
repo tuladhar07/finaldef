@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 function UpdateProfile() {
+  window.scrollTo(0, 0);
   const [selectedFile, setSelectedFile] = useState("");
   const [image, setImage] = useState("");
   const [username, setUserName] = useState("");
