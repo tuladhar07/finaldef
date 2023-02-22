@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Mycard from "../cards/Mycard.js";
 import "./Imagecarousel.css";
-
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 const Entrance = () => {
   const [apiData, setApiData] = useState([]);
   const location = useLocation();
@@ -88,8 +88,8 @@ const Entrance = () => {
                 name={book.bookname}
                 img={book.image}
                 author={book.author}
-                prices={book.prices}
-                s={book.author}
+                price={book.prices}
+                s={book.username}
               />
             ))}
           </div>
@@ -97,10 +97,20 @@ const Entrance = () => {
         <div className="cat_o">
           <p className="para_o">Filters</p>
           <hr />
-          <button onClick={SortingLowest}>Price (Lowest)</button>
-          <button onClick={SortingHighest}>Price (Highest)</button>
-          <button onClick={SortingAtoZ}>Alphabet (A-Z)</button>
-          <button onClick={SortingZtoA}>Alphabet (Z-A)</button>
+          <div className="filter-btn-arrange">
+            <button onClick={SortingLowest} className="filter-btn">
+              <ArrowRightIcon fontSize="small" /> Price (Lowest)
+            </button>
+            <button onClick={SortingHighest} className="filter-btn">
+              <ArrowRightIcon fontSize="small" /> Price (Highest)
+            </button>
+            <button onClick={SortingAtoZ} className="filter-btn">
+              <ArrowRightIcon fontSize="small" /> Alphabet (A-Z)
+            </button>
+            <button onClick={SortingZtoA} className="filter-btn">
+              <ArrowRightIcon fontSize="small" /> Alphabet (Z-A)
+            </button>
+          </div>
         </div>
       </div>
     </div>

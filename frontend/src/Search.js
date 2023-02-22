@@ -3,6 +3,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import "./search.css";
 import Mycard from "./cards/Mycard";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 const SearchResult = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -15,7 +16,6 @@ const SearchResult = () => {
   }, []);
 
   const SortingLowest = () => {
-    console.log("Hahahaha");
     const numAscending = [...searchResults].sort((a, b) => a.prices - b.prices);
     console.log(numAscending);
     setSearchResults(numAscending);
@@ -47,7 +47,11 @@ const SearchResult = () => {
     console.log(key);
     let result = await fetch(`http://localhost:5000/search/${key}`);
     result = await result.json();
+
     if (result) {
+      setSearchResults(result);
+    } else {
+      result = "Not found";
       setSearchResults(result);
     }
   };
@@ -65,9 +69,9 @@ const SearchResult = () => {
                 userId={searchResults.userId}
                 name={searchResults.bookname}
                 img={searchResults.image}
-                seller={searchResults.author}
+                author={searchResults.author}
                 price={searchResults.prices}
-                s={searchResults.author}
+                s={searchResults.username}
               />
             </>
           ))}
@@ -76,10 +80,20 @@ const SearchResult = () => {
         <div className="cat_o_search">
           <p className="para_o_search">Filters</p>
           <hr />
-          <button onClick={SortingLowest}>Price (Lowest)</button>
-          <button onClick={SortingHighest}>Price (Highest)</button>
-          <button onClick={SortingAtoZ}>Alphabet (A-Z)</button>
-          <button onClick={SortingZtoA}>Alphabet (Z-A)</button>
+          <div className="filter-btn-arrange">
+            <button onClick={SortingLowest} className="filter-btn">
+              <ArrowRightIcon fontSize="small" /> Price (Lowest)
+            </button>
+            <button onClick={SortingHighest} className="filter-btn">
+              <ArrowRightIcon fontSize="small" /> Price (Highest)
+            </button>
+            <button onClick={SortingAtoZ} className="filter-btn">
+              <ArrowRightIcon fontSize="small" /> Alphabet (A-Z)
+            </button>
+            <button onClick={SortingZtoA} className="filter-btn">
+              <ArrowRightIcon fontSize="small" /> Alphabet (Z-A)
+            </button>
+          </div>
         </div>
       </div>
     </div>

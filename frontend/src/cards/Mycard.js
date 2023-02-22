@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Mycard = (props) => {
   const navigate = useNavigate();
   const _id = localStorage.getItem("_id");
+  const username = localStorage.getItem("username");
 
   return (
     <div>
@@ -14,7 +15,7 @@ const Mycard = (props) => {
           <div className="card_det">
             <h2 className="card_name"> {props.name}</h2>
             <p className="author_name">{props.author}</p>
-            <p className="card_price">Rs. {props.prices} </p>
+            <p className="card_price">Rs. {props.price} </p>
             <p className="s_name">Posted By : {props.s}</p>
           </div>{" "}
           <button

@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import "./AddBook.css";
-import HeaderTwo from "../headers//HeaderTwo";
-import Footer from "../Footer";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import {Search,GpsFixed} from '@material-ui/icons'
-import AutoComplete from "../Googlemap/AutoComplete";
-import AddLocation from "../Googlemap/AddLocation";
 
 function AddBook() {
   const [selectedFile, setSelectedFile] = useState("");
@@ -20,7 +15,9 @@ function AddBook() {
   const [location, setLocation] = useState("");
 
   const userId = localStorage.getItem("_id");
+  const username = localStorage.getItem("username");
 
+ 
   const handleApi = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -34,6 +31,7 @@ function AddBook() {
     formData.append("prices", prices);
     formData.append("location", location);
     formData.append("userId", userId);
+    formData.append("username", username);
 
     const data = {};
 
@@ -85,15 +83,20 @@ function AddBook() {
           </div>
           <div>
             <label>Condition</label>
-            <select className="select-options" 
-            value={condition}
-            onChange={(e) => setCategory(e.target.value)}
-          > <option value="" disabled selected hidden>Select Condition</option>
-            <option value="+2">Brand New</option>
-            <option value="New">New</option>
-            <option value="Used">Used</option>
-            <option value="Old">Old</option>
-          </select>
+            <select
+              className="select-options"
+              value={condition}
+              onChange={(e) => setCondition(e.target.value)}
+            >
+              {" "}
+              <option value="" disabled selected hidden>
+                Select Condition
+              </option>
+              <option value="Brand New">Brand New</option>
+              <option value="New">New</option>
+              <option value="Used">Used</option>
+              <option value="Old">Old</option>
+            </select>
           </div>
           <div>
             <label>Publication Year</label>
@@ -116,15 +119,13 @@ function AddBook() {
             />
             <div>
               <label>Location</label>
-            {/* <input
-            //   type="text"
-            //   name="location"
-            //   value={location}
-            //   onChange={(e) => setLocation(e.target.value)}
-  // /> */}
-  <AddLocation/>
-          
-              
+              <input
+                type="text"
+                name="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+              {/*  <AddLocation /> */}
             </div>
           </div>
           <div className="Category">
@@ -133,11 +134,15 @@ function AddBook() {
               {""}
             </label>
             <select
-            className="select-options"
+              className="select-options"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            > <option value="" disabled selected hidden>Select Category</option>
-              <option value="+2">+2 Books</option>
+            >
+              {" "}
+              <option value="" disabled selected hidden>
+                Select Category
+              </option>
+              <option value="plustwo">+2 Books</option>
               <option value="bachelors">Bachelors</option>
               <option value="entrance">Entrance</option>
               <option value="school">School Books</option>
@@ -146,9 +151,15 @@ function AddBook() {
           <div className="image">
             <input type="file" name="file" onChange={handleImageChange} />
 
-            <button type="submit" className="uploadbtn" onChange={handleApi}>
+     <Link to = "/success" >     <button
+              type="submit"
+              className="uploadbtn"
+              onChange={handleApi}
+      
+            >
               Upload!
             </button>
+            </Link> 
           </div>
         </form>
       </div>

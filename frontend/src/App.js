@@ -15,10 +15,10 @@ import Category from "./Category";
 import About from "./About";
 import Profilepage from "./profile/ProfilePage";
 import UpdateBook from "./profile/UpdateBook";
-import HeaderTwoPage from "./headers/HeaderTwoPage";
 import SearchHeader from "./SearchHeader";
 import PriceFilter from "./cards/pricefilter";
-
+import ProfilePageTwo from "./profile/UploaderProfile";
+import AddedSucessfully from "./form/AddedSucessfully";
 import PrivateComponent from "./privatecomponent";
 import SearchResult from "./Search";
 import {
@@ -53,6 +53,8 @@ function App() {
         <Route path="/searchheader" element={<SearchHeader />}></Route>
         <Route path="/updatebook/:id" element={<UpdateBook />}></Route>
         <Route path="/pricefilter" element={<PriceFilter />}></Route>
+        <Route path="/profilepagetwo" element={<ProfilePageTwo />}></Route>
+        <Route path="/success" element={<AddedSucessfully />}></Route>
       </Routes>
 
       <Footer />

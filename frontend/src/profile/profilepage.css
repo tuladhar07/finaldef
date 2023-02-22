@@ -10,10 +10,10 @@
 
 .container_profile{
     display: grid;
-   
+    margin-top: 40px;
     grid-gap: 0.5rem;
    
-     grid-template-rows: 0.5fr 0fr 10fr; 
+     grid-template-rows: 0.5fr 0.5fr 10fr; 
     grid-template-columns: 1.2fr 3fr 1.2fr;
    
     grid-template-areas:
@@ -27,6 +27,9 @@
    
 
 }
+
+
+
 .left_container_profile{
     background-color: rgb(174, 173, 171, 0.2);
     grid-area: left_container;
@@ -40,7 +43,7 @@
   
 }
 .right_container_profile{
-    background-color: rgb(174, 173, 171, 0.2);
+
     grid-area: right_container;
     border-radius: 30px;
     font-family: 'Poppins';
@@ -187,4 +190,17 @@
     background-color: black;
     cursor:pointer;
 
+}
+
+.email_profile
+{
+
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    margin-left:10px;
 }

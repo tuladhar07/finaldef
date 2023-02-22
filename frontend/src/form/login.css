@@ -147,3 +147,20 @@ form span {
 .home-page-title {
     color: #222
 }
+/*otp page*/
+
+#sub_btn_otp{
+    display: block;
+    width: 100%;
+    padding: .3rem;
+    border: none;
+    background: orange;
+    color: #fff;
+    border-radius: 30px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+#sub_btn_otp:hover {
+    background: #333;
+    transition: all .5s
+}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import HeaderTwo from "../headers//HeaderTwo";
-import Footer from "../Footer";
+
 //import bycrpt from 'bcrypt.js'
 import "./login.css";
 const SignInPage = () => {
@@ -55,8 +54,8 @@ const SignInPage = () => {
           </p>
           <p>
             <label>Password</label>
-            <Link to="/forget-password">
-              <label className="right-label">Forget password?</label>
+            <Link to="/otp">
+              <label className="right-label">Verify User?</label>
             </Link>
             <br />
             <input

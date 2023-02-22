@@ -14,7 +14,7 @@ import "./fullscreensearch.css";
 function Home() {
   // This ref will be connected to the overlay div
   const overlayRef = useRef();
-
+  const auth = localStorage.getItem("_id");
   // This function is called when the "Start Searching" button gets clicked
   const openSearch = () => {
     overlayRef.current.style.width = "100%";
@@ -82,9 +82,19 @@ function Home() {
 
           <div className="banner_two">
             <h1 className="cat_name">Sell old books</h1>
-            <Link to="/addbook">
-              <button className="button_sell">Start</button>{" "}
-            </Link>
+            {/* <Link to="/addbook">
+              {" "}
+            </Link> */}
+
+            {auth ? (
+              <Link to="/addbook">
+                <button className="button_sell">Start</button>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <button className="button_sell">Start</button>{" "}
+              </Link>
+            )}
           </div>
         </div>
       </div>

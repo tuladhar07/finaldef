@@ -1,20 +1,18 @@
 import { useState } from "react";
 import "./signup.css";
 import FormInput from "../form/FormInput.js";
- 
 
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [values, setValues] = useState({
     username: "",
     email: "",
     birthday: "",
-    ContactNo:"",
+    ContactNo: "",
     password: "",
     confirmPassword: "",
   });
-  const navigate=useNavigate();
-
+  const navigate = useNavigate();
   const inputs = [
     {
       id: 1,
@@ -46,14 +44,12 @@ const SignUp = () => {
     {
       id: 4,
       name: "ContactNo",
-      type:"text",
-      errorMessage:"Please enter valid phone number!",
+      type: "text",
+      errorMessage: "Please enter valid phone number!",
       placeholder: "Contact No.",
       label: "ContactNo",
       pattern: "^[0-9]+$",
-      required:true,
-  
-
+      required: true,
     },
     {
       id: 5,
@@ -80,25 +76,23 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-     
-    const result = await fetch('http://localhost:5000/register', {
-      method: 'POST',
+
+    const result = await fetch("http://localhost:5000/register", {
+      method: "POST",
       body: JSON.stringify(values),
       headers: {
-        'Content-Type':'application/json',
-          }
+        "Content-Type": "application/json",
+      },
     });
     const data = await result.json();
     console.log(data);
     // console.log(data['data']['userID']);
-    if(result)
-    {
-      localStorage.setItem('_id', data['data']['_id'])
-      localStorage.setItem('email', data['data']['email'])
-    // localStorage.setItem("token", JSON.stringify(result.auth));
-      navigate('/otp');
+    if (result) {
+      localStorage.setItem("_id", data["data"]["_id"]);
+      localStorage.setItem("email", data["data"]["email"]);
+      // localStorage.setItem("token", JSON.stringify(result.auth));
+      navigate("/otp");
     }
-    
   };
 
   const onChange = (e) => {
@@ -108,23 +102,21 @@ const SignUp = () => {
   // console.log(values);
   return (
     <>
-  
-    <div className="app">
-    <h1 className="btn_reg">Register</h1>
-      <form className="signup_f" onSubmit={handleSubmit}>
-        
-        {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-          />
-        ))}
-        <button  className="btn_signup">Submit</button>
-      </form>
-    </div>
-   
+      <div className="app">
+        <h1 className="btn_reg">Register</h1>
+        <form className="signup_f" onSubmit={handleSubmit}>
+          {inputs.map((input) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={values[input.name]}
+              onChange={onChange}
+            />
+          ))}
+
+          <button className="btn_signup">Submit</button>
+        </form>
+      </div>
     </>
   );
 };

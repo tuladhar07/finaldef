@@ -66,8 +66,9 @@ function OTP() {
             </p>
 
 
-            <button id="sub_btn" type="button" className="btn_login" onClick={resendotp} >Resend Email</button>
-      <button id="sub_btn" type="submit" className="btn_login"  >Submit</button> 
+            <button id="sub_btn_otp" type="button" className="btn_login" onClick={resendotp} >Resend Email</button>
+            
+      <button id="sub_btn_otp" type="submit" className="btn_login"  >Submit</button> 
 
         </form>
 

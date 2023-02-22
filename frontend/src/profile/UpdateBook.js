@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../form//AddBook.css";
-import HeaderTwo from "../headers//HeaderTwo";
 import Footer from "../Footer";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -74,7 +73,6 @@ function UpdateBook() {
         prices,
         location,
         Image,
-        
       }),
       headers: {
         "Content-Type": "application/json",

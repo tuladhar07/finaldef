@@ -29,7 +29,17 @@
   height: 350px;
   width: 500px;
   margin-top: -35px;
+  animation: rotation 1s infinite linear;
 }
+
+@keyframes rotation {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(20);
+    }
+  }
 
 .banner
 {
@@ -94,7 +104,7 @@
 }
 .button_buy:hover
 {
-        
+        cursor: pointer;
         
         background-color: black;
       
@@ -117,7 +127,7 @@
 .button_sell:hover
 {
         
-        
+        cursor: pointer;
         background-color: black;
       
 }

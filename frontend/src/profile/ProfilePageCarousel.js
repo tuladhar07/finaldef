@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Profilecard from "./Profilecard.js";
 import axios from "axios";
-
-import entrance from "../components/Entrance.jpg";
-import school from "../components/School.jpg";
-
-import book1 from "../components/book1.jpg";
-import book2 from "../components/book2.jpg";
-import book3 from "../components/book3.jpg";
-import book4 from "../components/book4.jpg";
-import book5 from "../components/book5.jpg";
-
 const ProfilePagecarousel = () => {
   {
     const [apiData, setApiData] = useState([]);
@@ -32,8 +22,8 @@ const ProfilePagecarousel = () => {
         <div className="product-container-prof">
           {apiData.map((profilebook, index) => (
             <Profilecard
-            id={profilebook._id}
-            img={profilebook.image}
+              id={profilebook._id}
+              img={profilebook.image}
               name={profilebook.bookname}
               price={profilebook.prices}
               author={profilebook.author}
