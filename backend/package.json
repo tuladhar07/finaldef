@@ -25,6 +25,7 @@
     "pusher": "^5.1.2",
     "react-leaflet": "^4.2.0",
     "react-scripts": "^5.0.1",
-    "string": "^3.3.3"
+    "string": "^3.3.3",
+    "x-frame-options": "^1.0.0"
   }
 }

@@ -11,7 +11,18 @@ const jwtKey = "pustak";
 const app = express();
 const multiparty = require("multiparty");
 const IMAGE_UPLOAD_DIR = "./uploads";
-const IMAGE_UPLOAD_DIR1 = "./profileimg";
+const path = require("path");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "profile");
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage: storage });
 const IMAGE_BASE_URL = "http://localhost:5000/";
 const { createBrotliCompress } = require("zlib");
 const nodemailer = require("nodemailer");
@@ -22,6 +33,10 @@ const PasswordReset = require("./PasswordReset"); //Password reset schema
 //password handler
 const bcrypt = require("bcrypt");
 const { errorMonitor } = require("events");
+
+app.post("/propic", upload.single("image"), (req, resp) => {
+  resp.send("image uploaded");
+});
 
 app.use(cors());
 
@@ -36,8 +51,7 @@ app.post("/sendotp", async (req, resp) => {
   sendOTPVerificationEmail(req.body, resp);
 });
 
-app.post("/register", async (req, resp) => {
-  // resp.send(req.body);
+app.post("/register", upload.single("image"), async (req, resp) => {
   let { username, email, ContactNo, password, confirmPassword } = req.body;
 
   if (!username || !email || !ContactNo || !password || !confirmPassword) {
@@ -61,6 +75,7 @@ app.post("/register", async (req, resp) => {
   try {
     const hashedPassword = await bcrypt.hash(confirmPassword.trim(), salt);
     password = hashedPassword;
+
     const newUser = await new User({
       username,
       email,
@@ -89,7 +104,6 @@ app.post("/register", async (req, resp) => {
     });
   }
 });
-
 //node mailer stuff
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -159,7 +173,10 @@ app.post("/login", async (req, resp) => {
   if (!user1[0].verified) {
     resp.send({ result: "USER NOT VERIFIED YET " });
   }
-  let user = await User.find({ username }).select("password").select("email").select("username");
+  let user = await User.find({ username })
+    .select("password")
+    .select("email")
+    .select("username");
   console.log(user);
   let checkValid = await bcrypt.compare(password, user[0].password);
   console.log(checkValid);
@@ -206,6 +223,8 @@ app.post("/add-product", (req, resp) => {
       category: fields.category[0],
       prices: fields.prices[0],
       userId: fields.userId[0],
+      username: fields.username[0],
+      location: fields.location[0],
       image: imageURL,
     });
 
@@ -425,7 +444,6 @@ app.get("/search/:key", async (req, resp) => {
   let result = await Product.find({
     $or: [{ bookname: { $regex: req.params.key.trim(), $options: "i" } }],
   });
-
   resp.send(result);
 });
 
@@ -488,17 +506,3 @@ app.get("/review/:id", async (req, resp) => {
 });
 
 app.listen(5000);
-
-
-
-// const pusher = new Pusher({
-//   appId: "1553800",
-//   key: "7301c04b6d68b65ccc23",
-//   secret: "4d7abe3c6ae643d36dfd",
-//   cluster: "ap2",
-//   useTLS: true
-// });
-
-// pusher.trigger("my-channel", "my-event", {
-//   message: "hello world"
-// });
